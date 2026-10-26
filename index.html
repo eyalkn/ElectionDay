@@ -59,6 +59,18 @@
     .prep-sub-title { font-weight: bold; margin-bottom: 6px; }
     .prep-sub-kitchen { color: #fca5a5; }
     .prep-sub-bar { color: #7dd3fc; }
+
+    .nav-btn.run-btn { background: #3b1f5f; color: #d8b4fe; border-color: #8b5cf6; }
+    .nav-btn.run-btn.active { background: #7c3aed; color: #ffffff; border-color: #a78bfa; }
+    .col-run-full { border-top: 5px solid #8b5cf6; }
+    .col-run-full h2 { color: #c4b5fd; }
+    .tl-list .task-item { padding: 6px 8px; border-radius: 6px; margin-bottom: 4px; font-size: 14px; }
+    .tl-time { display: inline-block; min-width: 52px; font-weight: bold; color: #c4b5fd; font-variant-numeric: tabular-nums; }
+    .tl-item-serve { background: #2a1d0b; border-right: 3px solid #f59e0b; }
+    .tl-item-serve .tl-time { color: #fbbf24; }
+    .tl-item-alert { background: #2b0f12; border-right: 3px solid #ef4444; }
+    .tl-item-alert .tl-time { color: #f87171; }
+    .tl-note { font-size: 13px; color: #9ca3af; margin-bottom: 12px; }
   </style>
 </head>
 <body>
@@ -70,6 +82,7 @@
 
   <div class="nav-bar">
     <button class="nav-btn prep-btn active" onclick="showDish('prep')">📋 ריכוז הכנות מראש (Prep Master)</button>
+    <button class="nav-btn run-btn" onclick="showDish('run')">⏱️ ציר זמן (Run Sheet)</button>
     <button class="nav-btn" onclick="showDish(1)">1. בנדיקט &amp; מימוזה</button>
     <button class="nav-btn" onclick="showDish(2)">2. סביצ'ה פאני פורי &amp; G&amp;T</button>
     <button class="nav-btn" onclick="showDish(3)">3. אמפנדס &amp; פרנט קולה</button>
@@ -148,6 +161,7 @@
               <li class="task-item"><input type="checkbox" id="p3_k2"><span>בישול מלית בקר, מילוי וסגירת האמפנדס (שמירה במקרר).</span></li>
               <li class="task-item"><input type="checkbox" id="p3_k3"><span><strong>רוטב תירס שרוף:</strong> צריבת תירס באש חיה, טחינה חלקה עם שום קונפי וציר וסינון.</span></li>
               <li class="task-item"><input type="checkbox" id="p3_k4"><span>הכנת סיר טיגון עמוק ובדיקת מד-חום.</span></li>
+              <li class="task-item"><input type="checkbox" id="p3_k5"><span><strong>עמבה:</strong> מילוי בקבוקן (squeeze) ברוטב עמבה, ערבוב/סינון לזרימה חלקה.</span></li>
             </ul>
           </div>
           <div class="prep-sub">
@@ -231,6 +245,96 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- TAB: ציר זמן -->
+  <div id="dish-run" class="dish-screen">
+    <div class="dish-header">
+      <div class="dish-title">⏱️ ציר זמן (Run Sheet)</div>
+      <div class="dish-plate">ערב לפני 21:00 ← יום האירוע, ארוחה 20:00</div>
+    </div>
+
+    <div class="column col-run-full">
+      <h2>🌙 ערב לפני האירוע – מ-21:00</h2>
+      <div class="tl-note">הבקר בבירה מתבשל ברקע בזמן שעובדים על הבצקים. בצק הבריוש לאינגליש מאפינס מתפיח 12 שעות במקרר.</div>
+      <ul class="task-list tl-list">
+        <li class="task-item"><input type="checkbox" id="rn_1"><span><b class="tl-time">21:00</b> 🍳 <strong>בצק בריוש לאינגליש מאפינס:</strong> 500 גרם קמח, שמרים, סוכר, מלח, חלב, מים, 40 גרם גהי. לישה עד בצק חלק ואלסטי, כיסוי והכנסה למקרר להתפחה של 12 שעות.</span></li>
+        <li class="task-item"><input type="checkbox" id="rn_2"><span><b class="tl-time">21:25</b> 🍳 <strong>בקר בבירה:</strong> צריבת הבשר, הוספת הבירה השחורה והכנסה לבישול ארוך על אש נמוכה (כ-2.5–3 שעות).</span></li>
+        <li class="task-item"><input type="checkbox" id="rn_3"><span><b class="tl-time">21:50</b> 🍳 <strong>בצק אמפנדס (בצק וודקה):</strong> הכנה, עטיפה ומנוחה במקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rn_4"><span><b class="tl-time">22:05</b> 🍳 <strong>מלית בקר לאמפנדס:</strong> בישול וצינון מלא לפני המילוי.</span></li>
+        <li class="task-item"><input type="checkbox" id="rn_5"><span><b class="tl-time">22:50</b> 🍳 <strong>הרכבת אמפנדס:</strong> רידוד ל-1.5 מ"מ, חיתוך עיגולים, מילוי, סגירה וקיפול. מגש מכוסה למקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rn_6"><span><b class="tl-time">00:15</b> 🍳 <strong>בקר בבירה:</strong> בדיקת רכות, צמצום הרוטב לזיגוג, צינון והכנסה למקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rn_7"><span><b class="tl-time">00:20</b> 🍸 <strong>למקרר:</strong> קוקה קולה, יין מבעבע, טוניק, ג'ינג'ר ביר, שרי פינו. הכנת קרח בשפע במקפיא.</span></li>
+      </ul>
+    </div>
+
+    <div class="column col-run-full" style="margin-top: 16px;">
+      <h2>☀️ יום האירוע – הכנות במהלך היום</h2>
+      <div class="tl-note">כל הטיגונים מרוכזים בסבב אחד (13:30), והחיתוכים והקישוטים בסבב אחר הצהריים.</div>
+      <ul class="task-list tl-list">
+        <li class="task-item"><input type="checkbox" id="rd_1"><span><b class="tl-time">09:00</b> 🍳 <strong>אינגליש מאפינס (בריוש):</strong> הוצאה מהמקרר, חלוקה ועיצוב עיגולים על סולת/קמח תירס, התפחה שנייה (~1.5–2 שעות).</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_3"><span><b class="tl-time">10:00</b> 🍳 <strong>בצק איטריות:</strong> לישה, עטיפה ומנוחה 30 דק'.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_4"><span><b class="tl-time">10:15</b> 🍳 <strong>רוטב איטריות:</strong> ציר בקר/פורצ'יני ויין מדירה/פורט לצמצום ארוך (Glace) על אש נמוכה.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_5"><span><b class="tl-time">10:30</b> 🍳 <strong>הכנת האיטריות:</strong> רידוד וחיתוך, בישול חצי 60–90 שניות, שטיפה ושימון קל בגהי. קופסה למקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_8"><span><b class="tl-time">11:00</b> 🍳 <strong>אינגליש מאפינס:</strong> בישול במחבת על אש בינונית-נמוכה עד הזהבה משני הצדדים. צינון ואחסון סגור.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_9"><span><b class="tl-time">12:00</b> 🍳 <strong>שום קונפי</strong> (לרוטב התירס) על אש נמוכה מאוד.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_10"><span><b class="tl-time">12:00</b> 🍳 <strong>מרק ארטישוק ירושלמי:</strong> אידוי בגהי, בישול, טחינה וסינון בשינואה. צינון ולמקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_11"><span><b class="tl-time">12:45</b> 🍳 <strong>רוטב תירס שרוף:</strong> צריבת תירס באש חיה, טחינה חלקה עם שום קונפי וציר, סינון. למקרר.</span></li>
+        <li class="task-item tl-item-alert"><input type="checkbox" id="rd_12"><span><b class="tl-time">13:15</b> 🔥 <strong>הדלקת הציפסר לסבב טיגונים</strong> (180°C).</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_13"><span><b class="tl-time">13:30</b> 🍳 <strong>סבב טיגונים:</strong> כדורי פאני פורי ← צ'יפס ארטישוק (מנדולינה, המלחה קלה) ← שאלוט פריך. כל אחד לכלי יבש ואטום. כיבוי הציפסר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_14"><span><b class="tl-time">14:30</b> 🍳 <strong>פנגריטטה:</strong> פנקו בגהי, שום, שמרי בירה וגרידת לימון. לצנצנת יבשה.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_15"><span><b class="tl-time">14:45</b> 🍳 <strong>בצל סגול מוחמץ:</strong> רצועות דקות בחומץ תפוחים, מים ומעט סוכר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_16"><span><b class="tl-time">15:00</b> 🍳 <strong>פטריות יער:</strong> צריבה חזקה בגהי עם עלי מרווה. צינון ולמקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_17"><span><b class="tl-time">15:20</b> 🍳 <strong>צ'ימיצ'ורי:</strong> פטרוזיליה, שום, אורגנו, צ'ילי, חומץ ושמן זית.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_30"><span><b class="tl-time">15:30</b> 🍳 <strong>בקבוקן עמבה:</strong> מילוי הבקבוקן ברוטב עמבה (ערבוב/סינון לזרימה חלקה). לאמפנדס.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_18"><span><b class="tl-time">15:35</b> 🍳 <strong>סבב חיתוכים – מטבח:</strong> פריסת סלמון דק · טבעות פלפל צהוב (מעמד לפאני פורי) · ירקות לסביצ'ה (פלפל צהוב, עגבניות ללא מיץ, בצל, כוסברה, פטרוזיליה, צ'ילי) · עירית קצוצה בקופסה עם נייר לח.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_19"><span><b class="tl-time">16:15</b> 🍳 <strong>קישוטים:</strong> פרחי מאכל, חוטי צ'ילי / מיקרו ירוק, שמן כמהין ליד העמדה, אגוז מוסקט.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_20"><span><b class="tl-time">16:30</b> 🍳 <strong>קציפת פרמז'ן:</strong> הכנה בסיפון/מיקסר ולמקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_21"><span><b class="tl-time">16:45</b> 🍸 <strong>סבב חיתוכים – בר:</strong> סחיטה וסינון 480 מ"ל מיץ הדרים · סחיטת 180 מ"ל ליים · 12 גלגלי ליים · סלייסים של אשכולית/ליים ל-G&amp;T · סרטי קליפת תפוז · ענפי רוזמרין.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_22"><span><b class="tl-time">17:15</b> 🍸 <strong>קנקן מימוזה:</strong> 480 מ"ל מיץ + 60 מ"ל קואנטרו + 12 דאש אנגוסטורה. למקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_23"><span><b class="tl-time">17:20</b> 🍸 <strong>קנקן מנהטן:</strong> 450 מ"ל ריי + 180 מ"ל ורמוט אדום + 120 מ"ל Cynar + 12 דאש אנגוסטורה. למקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_24"><span><b class="tl-time">17:30</b> 🍳 <strong>אורז:</strong> בישול אורז ריחני עם מעט גהי, שמירה מכוסה.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_25"><span><b class="tl-time">17:45</b> 🍳 <strong>תרד:</strong> אידוי קצר עם כפית גהי, מלח ופלפל.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_26"><span><b class="tl-time">18:00</b> 🍸 <strong>כוסות:</strong> 12 כוסות פלוט למקרר, 12 כוסות קופט למקפיא. בדיקת מלאי קרח.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_27"><span><b class="tl-time">18:10</b> 🍸 <strong>עמדת בר:</strong> ג'ין, פרנט ברנקה, רום כהה, סאקה, כוסות לואובול, הייבול וכוסות חרס, כוס ערבוב, מסננת, ג'יגר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_28"><span><b class="tl-time">18:20</b> 🍳 <strong>צלחות לפי סדר:</strong> מרובעת · פרחים קטנה · עגולה · כוסית שקופה · פרחים מרק · פרחים גדולה. רינג לאורז.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_29"><span><b class="tl-time">18:30</b> 🍳 בקר בבירה מחוץ למקרר, הסרת שומן קרוש מהרוטב.</span></li>
+      </ul>
+    </div>
+
+    <div class="column col-run-full" style="margin-top: 16px;">
+      <h2>🍽️ יום האירוע – הסרוויס (ארוחה 20:00, מנה כל 15 דק')</h2>
+      <ul class="task-list tl-list">
+        <li class="task-item"><input type="checkbox" id="rs_1"><span><b class="tl-time">18:45</b> 🍳 חימום אמבט סו-וויד ל-62°C.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_2"><span><b class="tl-time">19:00</b> 🍳 <strong>ביצים:</strong> 14 ביצים לסו-וויד, 40 דק'.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_3"><span><b class="tl-time">19:15</b> 🍳 <strong>דג לסביצ'ה:</strong> חיתוך לקוביות, ערבוב עם הירקות. בקירור עד ההגשה.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_4"><span><b class="tl-time">19:30</b> 🍳 <strong>הולנדייז גהי:</strong> 4 חלמונים + 20 מ"ל מים בבן-מארי, זילוף 180 גרם גהי. שמירה חמימה.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_5"><span><b class="tl-time">19:40</b> 🍳 הוצאת הביצים לקירור. 3 סירים על הכיריים ל-85°C. קליית אינגליש מאפינס.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_7"><span><b class="tl-time">19:55</b> 🍸 <strong>מימוזה:</strong> 45 מ"ל מהקנקן + 75 מ"ל מבעבע קר לכוסות הפלוט.</span></li>
+        <li class="task-item tl-item-alert"><input type="checkbox" id="rs_8"><span><b class="tl-time">20:00</b> 🔥 <strong>הדלקת תנור</strong> (למנה הנוספת שלא במסך).</span></li>
+        <li class="task-item tl-item-serve"><input type="checkbox" id="rs_9"><span><b class="tl-time">20:00</b> 🍽️ <strong>מנה 1 – בנדיקט &amp; מימוזה</strong></span></li>
+        <li class="task-item tl-item-alert"><input type="checkbox" id="rs_10"><span><b class="tl-time">20:05</b> 🔥 <strong>להדליק את הציפסר!</strong> (חייב להגיע ל-180°C לפני האמפנדס)</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_11"><span><b class="tl-time">20:08</b> 🍳 תיבול סביצ'ה (שמן זית, יוזו/ליים, מלח) ומילוי כדורי פאני פורי.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_12"><span><b class="tl-time">20:10</b> 🍸 <strong>G&amp;T:</strong> קרח, 40 מ"ל ג'ין, 80–100 מ"ל טוניק, חריכת רוזמרין ופרוסת הדר.</span></li>
+        <li class="task-item tl-item-serve"><input type="checkbox" id="rs_13"><span><b class="tl-time">20:15</b> 🍽️ <strong>מנה 2 – סביצ'ה פאני פורי &amp; G&amp;T</strong></span></li>
+        <li class="task-item"><input type="checkbox" id="rs_14"><span><b class="tl-time">20:18</b> 🍳 חימום רוטב תירס שרוף. בדיקת מד-חום בציפסר (180°C).</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_16"><span><b class="tl-time">20:23</b> 🍳 <strong>טיגון אמפנדס</strong> 2–3 דק' עד הזהבה. צילחות: פס רוטב תירס, אמפנדס, צ'ימיצ'ורי ונקודות עמבה מהבקבוקן.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_17"><span><b class="tl-time">20:25</b> 🍸 <strong>פרנט קולה:</strong> לואובול מלא קרח, 30–40 מ"ל פרנט, קולה ביציקה אלכסונית לקצף.</span></li>
+        <li class="task-item tl-item-serve"><input type="checkbox" id="rs_18"><span><b class="tl-time">20:30</b> 🍽️ <strong>מנה 3 – אמפנדס &amp; פרנט קולה</strong></span></li>
+        <li class="task-item"><input type="checkbox" id="rs_19"><span><b class="tl-time">20:30</b> 🍸 אמבט מים חמימים לסאקה (45°C).</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_20"><span><b class="tl-time">20:33</b> 🍳 חימום מרק ארטישוק והקצפת חלב עם אגוז מוסקט.</span></li>
+        <li class="task-item tl-item-alert"><input type="checkbox" id="rs_21"><span><b class="tl-time">20:40</b> 💧 <strong>הרתחת מים לאיטריות.</strong> חימום הבקר בבירה על אש נמוכה + חימום האורז.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_22"><span><b class="tl-time">20:42</b> 🍸 מזיגת שרי פינו קר (45 מ"ל) / סאקה חם לכוסות חרס.</span></li>
+        <li class="task-item tl-item-serve"><input type="checkbox" id="rs_23"><span><b class="tl-time">20:45</b> 🍽️ <strong>מנה 4 – קפוצ'ינו ארטישוק &amp; שרי/סאקה</strong></span></li>
+        <li class="task-item"><input type="checkbox" id="rs_24"><span><b class="tl-time">20:50</b> 🍳 חליטת איטריות, הקפצה עם הפטריות בציר המצומצם וכפית גהי.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_25"><span><b class="tl-time">20:55</b> 🍸 <strong>מנהטן:</strong> ערבוב מהקנקן עם קרח, סינון לקופטים מהמקפיא, זסט תפוז.</span></li>
+        <li class="task-item tl-item-serve"><input type="checkbox" id="rs_26"><span><b class="tl-time">21:00</b> 🍽️ <strong>מנה 5 – איטריות פטריות &amp; מנהטן</strong></span></li>
+        <li class="task-item"><input type="checkbox" id="rs_27"><span><b class="tl-time">21:05</b> 🍳 הידוק אורז ברינג, הנחת בקר ורוטב, שאלוט פריך, בצל מוחמץ ועירית.</span></li>
+        <li class="task-item tl-item-alert"><input type="checkbox" id="rs_28"><span><b class="tl-time">21:10</b> 🔥 <strong>הכנסה לתנור</strong> (המנה הנוספת).</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_29"><span><b class="tl-time">21:10</b> 🍸 <strong>Dark &amp; Stormy:</strong> קרח, 15 מ"ל ליים, 100 מ"ל ג'ינג'ר ביר, רום כהה על גב כפית, גלגל ליים.</span></li>
+        <li class="task-item tl-item-serve"><input type="checkbox" id="rs_30"><span><b class="tl-time">21:15</b> 🍽️ <strong>מנה 6 – בקר בבירה ואורז &amp; Dark &amp; Stormy</strong></span></li>
+      </ul>
     </div>
   </div>
 
@@ -320,7 +424,7 @@
     <div class="split-container">
       <div class="column col-kitchen">
         <h2>🍳 צד ימין: הכנת המנה (סביצ'ה פאני פורי)</h2>
-        <img class="card-banner-img" src="./index_files/7603459518815690827_0" alt="Pani Puri Ceviche">
+        <img class="card-banner-img" src="./index_files/pani-puri.jpg" alt="Pani Puri Ceviche">
         <div class="step-box chef-note">
           <div class="step-title">💡 התאמות שף:</div>
           <div>כדורי פאני מטוגנים מראש, מעמד טבעת פלפל צהוב, סביצ'ה עשיר וקציפת פרמז'ן אוורירית לצד הכדור.</div>
@@ -373,10 +477,10 @@
     <div class="split-container">
       <div class="column col-kitchen">
         <h2>🍳 צד ימין: הכנת המנה (אמפנדס)</h2>
-        <img class="card-banner-img" src="./index_files/photo-1628840042765-356cda07504e" alt="Empanadas">
+        <img class="card-banner-img" src="./index_files/empanadas-corn-sauce.jpg" alt="Empanadas with burnt corn sauce">
         <div class="step-box chef-note">
           <div class="step-title">💡 התאמות שף:</div>
-          <div>בצק וודקה פריך, צילחות מעל רוטב תירס שרוף עשיר ומקורמל.</div>
+          <div>בצק וודקה פריך, צילחות מעל רוטב תירס שרוף עשיר ומקורמל, נקודות עמבה מבקבוקן.</div>
         </div>
         <div class="step-box prep">
           <div class="step-title">1. פעילות קדם</div>
@@ -384,20 +488,21 @@
             <li class="task-item"><input type="checkbox" id="d3_k1"><span>בצק וודקה ממולא במלית בקר, מקופל ומוכן בקירור.</span></li>
             <li class="task-item"><input type="checkbox" id="d3_k2"><span><strong>רוטב תירס שרוף:</strong> צריבת גרגרי תירס במחבת/אש עזה, טחינה עם מעט שום קונפי וציר לקרם חלק. שמירה חם.</span></li>
             <li class="task-item"><input type="checkbox" id="d3_k3"><span>הכנת צ'ימיצ'ורי טרי וחמצמץ.</span></li>
+            <li class="task-item"><input type="checkbox" id="d3_k6"><span>בקבוקן עמבה מוכן ליד עמדת הצילחות.</span></li>
           </ul>
         </div>
         <div class="step-box action">
           <div class="step-title">2. סרוויס - טיגון וצילחות</div>
           <ul class="task-list">
             <li class="task-item"><input type="checkbox" id="d3_k4"><span>טיגון עמוק ב-180°C כ-2–3 דקות עד בועיות פריכות והזהבה עמוקה.</span></li>
-            <li class="task-item"><input type="checkbox" id="d3_k5"><span><strong>צלחות:</strong> משיכת פס מרוטב התירס השרוף במרכז הצלחת העגולה, מעליו האמפנדס החם ונגיעת צ'ימיצ'ורי.</span></li>
+            <li class="task-item"><input type="checkbox" id="d3_k5"><span><strong>צלחות:</strong> משיכת פס מרוטב התירס השרוף במרכז הצלחת העגולה, מעליו האמפנדס החם, נגיעת צ'ימיצ'ורי ונקודות עמבה מהבקבוקן.</span></li>
           </ul>
         </div>
       </div>
 
       <div class="column col-bar">
         <h2>🍸 צד שמאל: הכנת המשקה (Fernet con Coca)[cite: 7]</h2>
-        <img class="card-banner-img" src="./index_files/photo-1551024709-8f23befc6f87" alt="Fernet con Coca">
+        <img class="card-banner-img" src="./index_files/fernet-con-coca.jpg" alt="Fernet con Coca">
         <div class="step-box chef-note">
           <div class="step-title">💡 דגש חובה:</div>
           <div>הקוקה קולה חייבת להיות במקרר עמוק (קרה כקרח) לפני המזיגה!</div>
@@ -423,7 +528,7 @@
     <div class="split-container">
       <div class="column col-kitchen">
         <h2>🍳 צד ימין: הכנת המנה (מרק קפוצ'ינו)</h2>
-        <img class="card-banner-img" src="./index_files/7603459518815690827_1" alt="Artichoke Cappuccino">
+        <img class="card-banner-img" src="./index_files/jerusalem-artichoke-soup.jpg" alt="Artichoke Cappuccino">
         <div class="step-box chef-note">
           <div class="step-title">💡 התאמות שף:</div>
           <div>אידוי בסיס המרק בגהי, צ'יפס ארטישוק פריך בטיגון עמוק.</div>
@@ -473,7 +578,7 @@
     <div class="split-container">
       <div class="column col-kitchen">
         <h2>🍳 צד ימין: הכנת המנה (איטריות תוצרת בית)</h2>
-        <img class="card-banner-img" src="./index_files/photo-1546549032-9571cd6b27df" alt="Mushroom Noodles">
+        <img class="card-banner-img" src="./index_files/mushroom-noodles.jpg" alt="Mushroom Noodles">
         <div class="step-box chef-note">
           <div class="step-title">💡 התאמות שף (כשר לבשר):</div>
           <div>איטריות טריות עבודת יד, רוטב ציר בקר ופטריות מרוכז (ללא חלב), פנגריטטה קראנצ'ית מראש.</div>
@@ -526,7 +631,7 @@
     <div class="split-container">
       <div class="column col-kitchen">
         <h2>🍳 צד ימין: הכנת המנה (בקר בבירה ואורז)</h2>
-        <img class="card-banner-img" src="./index_files/photo-1544025162-d76694265947" alt="Beef in Beer with Rice">
+        <img class="card-banner-img" src="./index_files/beef-in-beer.jpg" alt="Beef in Beer with Rice">
         <div class="step-box chef-note">
           <div class="step-title">💡 התאמות שף:</div>
           <div>בסיס ערימת אורז מהודקת ברינג, בקר בבירה שחורה ברוטב מצומצם וסמיך (ללא קרם שורשים), קישוט שאלוט פריך ובצל מוחמץ.</div>
@@ -552,7 +657,7 @@
 
       <div class="column col-bar">
         <h2>🍸 צד שמאל: הכנת המשקה (Dark &amp; Stormy)[cite: 7]</h2>
-        <img class="card-banner-img" src="./index_files/photo-1514362545857-3bc16c4c7d1b" alt="Dark and Stormy">
+        <img class="card-banner-img" src="./index_files/dark-and-stormy.jpg" alt="Dark and Stormy">
         <div class="step-box drink">
           <div class="step-title">1. מזיגה והרכבה שכבתית</div>
           <ul class="task-list">
