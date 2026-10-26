@@ -70,18 +70,34 @@
     .tl-item-serve .tl-time { color: #fbbf24; }
     .tl-item-alert { background: #2b0f12; border-right: 3px solid #ef4444; }
     .tl-item-alert .tl-time { color: #f87171; }
+    details.recipe { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; margin: 4px 0 12px; font-size: 13.5px; }
+    details.recipe summary { cursor: pointer; padding: 8px 12px; font-weight: bold; color: #fbbf24; list-style-position: inside; }
+    details.recipe[open] summary { border-bottom: 1px solid #30363d; }
+    .recipe-body { padding: 10px 14px; color: #cbd5e1; }
+    .recipe-body p { margin-bottom: 10px; }
+    .recipe-body h4 { color: #f3f4f6; font-size: 15px; margin: 12px 0 6px; }
+    .recipe-sub { font-weight: bold; color: #fca5a5; margin: 8px 0 4px; }
+    .recipe-body ul, .recipe-body ol { padding-right: 20px; margin-bottom: 6px; }
+    .recipe-body li { margin-bottom: 3px; }
+    .tl-list .tl-recipe { list-style: none; margin: -2px 0 8px; }
+    .nav-btn.shop-btn { background: #14352a; color: #6ee7b7; border-color: #10b981; }
+    .nav-btn.shop-btn.active { background: #059669; color: #ffffff; border-color: #34d399; }
+    .col-shop-full { border-top: 5px solid #10b981; }
+    .col-shop-full h2 { color: #6ee7b7; }
+    .shop-group { font-weight: bold; color: #e5e7eb; font-size: 13px; margin: 8px 0 4px; }
     .tl-note { font-size: 13px; color: #9ca3af; margin-bottom: 12px; }
   </style>
 </head>
 <body>
 
   <div class="top-header">
-    <div style="font-size: 14px; color: #9ca3af;">סרוויס ארוחת טעימות • מותאם אישית (ללא חמאה - מבוסס גהי | מנות 5-6 כשרות לבשר)</div>
+    <div style="font-size: 14px; color: #9ca3af;">סרוויס ארוחת טעימות • מותאם אישית (גהי בהולנדייז בלבד)</div>
     <button class="reset-btn" onclick="resetAllCheckboxes()">🔄 אפס את כל הסימונים</button>
   </div>
 
   <div class="nav-bar">
     <button class="nav-btn prep-btn active" onclick="showDish('prep')">📋 ריכוז הכנות מראש (Prep Master)</button>
+    <button class="nav-btn shop-btn" onclick="showDish('shop')">🛒 מצרכים</button>
     <button class="nav-btn run-btn" onclick="showDish('run')">⏱️ ציר זמן (Run Sheet)</button>
     <button class="nav-btn" onclick="showDish(1)">1. בנדיקט &amp; מימוזה</button>
     <button class="nav-btn" onclick="showDish(2)">2. סביצ'ה פאני פורי &amp; G&amp;T</button>
@@ -108,10 +124,10 @@
           <div class="prep-sub">
             <div class="prep-sub-title prep-sub-kitchen">🍳 הכנות מטבח:</div>
             <ul class="task-list">
-              <li class="task-item"><input type="checkbox" id="p1_k1"><span><strong>אינגליש מאפינס:</strong> 500 גרם קמח, שמרים, סוכר, מלח, חלב, מים, <strong>40 גרם גהי (Ghee) במקום חמאה</strong>. קליה במחבת על סולת/קמח תירס.</span></li>
-              <li class="task-item"><input type="checkbox" id="p1_k2"><span><strong>סלמון ותרד:</strong> פריסת סלמון דק. אידוי קצר של עלי תרד עם כפית גהי, מלח ופלפל.</span></li>
+              <li class="task-item"><input type="checkbox" id="p1_k1"><span><strong>אינגליש מאפינס:</strong> 500 גרם קמח, שמרים, סוכר, מלח, חלב, מים, <strong>40 גרם חמאה רכה</strong>. קליה במחבת על סולת/קמח תירס.</span></li>
+              <li class="task-item"><input type="checkbox" id="p1_k2"><span><strong>סלמון ותרד:</strong> פריסת סלמון דק. אידוי קצר של עלי תרד עם כפית חמאה, מלח ופלפל.</span></li>
               <li class="task-item"><input type="checkbox" id="p1_k3"><span><strong>סו-וויד ביצים:</strong> 14 ביצים ב-62°C למשך 40 דק'. קירור מידי בקערה.</span></li>
-              <li class="task-item"><input type="checkbox" id="p1_k4"><span><strong>עמדת הולנדייז גהי:</strong> שקילת 180 גרם גהי חמים, 4 חלמונים, סיר בן-מארי ומטרפה.</span></li>
+              <li class="task-item"><input type="checkbox" id="p1_k4"><span><strong>עמדת הולנדייז גהי:</strong> 375 גרם גהי, 9 חלמונים, לימון סחוט, בלנדר מוט ומד-ליטר צר וגבוה (1 ליטר לפחות). <strong>🫙 תרמוס רחב נקי ומוכן.</strong></span></li>
               <li class="task-item"><input type="checkbox" id="p1_k5"><span><strong>עמדת סרוויס:</strong> 3 סירים על הכיריים מוכנים לרתיחה ב-85°C.</span></li>
             </ul>
           </div>
@@ -124,6 +140,8 @@
             </ul>
           </div>
         </div>
+        <details class="recipe" data-recipe="muffins"></details>
+        <details class="recipe" data-recipe="hollandaise"></details>
       </div>
 
       <!-- מנה 2 -->
@@ -157,9 +175,9 @@
           <div class="prep-sub">
             <div class="prep-sub-title prep-sub-kitchen">🍳 הכנות מטבח:</div>
             <ul class="task-list">
-              <li class="task-item"><input type="checkbox" id="p3_k1"><span>הכנת בצק וודקה (גהי/שמן בקר), רידוד (1.5 מ"מ), מנוחה.</span></li>
+              <li class="task-item"><input type="checkbox" id="p3_k1"><span>הכנת בצק וודקה (שומן בקר מזוקק או חמאה קרה), רידוד (1.5 מ"מ), מנוחה.</span></li>
               <li class="task-item"><input type="checkbox" id="p3_k2"><span>בישול מלית בקר, מילוי וסגירת האמפנדס (שמירה במקרר).</span></li>
-              <li class="task-item"><input type="checkbox" id="p3_k3"><span><strong>רוטב תירס שרוף:</strong> צריבת תירס באש חיה, טחינה חלקה עם שום קונפי וציר וסינון.</span></li>
+              <li class="task-item"><input type="checkbox" id="p3_k3"><span><strong>רוטב תירס שרוף:</strong> חריכת תירס במחבת יבשה לוהטת, טחינה עם מי בישול, הסמכה בחמאה קרה לאמולסיה.</span></li>
               <li class="task-item"><input type="checkbox" id="p3_k4"><span>הכנת סיר טיגון עמוק ובדיקת מד-חום.</span></li>
               <li class="task-item"><input type="checkbox" id="p3_k5"><span><strong>עמבה:</strong> מילוי בקבוקן (squeeze) ברוטב עמבה, ערבוב/סינון לזרימה חלקה.</span></li>
             </ul>
@@ -172,6 +190,8 @@
             </ul>
           </div>
         </div>
+        <details class="recipe" data-recipe="empanadas"></details>
+        <details class="recipe" data-recipe="corn"></details>
       </div>
 
       <!-- מנה 4 -->
@@ -181,7 +201,7 @@
           <div class="prep-sub">
             <div class="prep-sub-title prep-sub-kitchen">🍳 הכנות מטבח:</div>
             <ul class="task-list">
-              <li class="task-item"><input type="checkbox" id="p4_k1"><span>בישול מרק ארטישוק ירושלמי (אידוי בגהי), טחינה וסינון בשינואה.</span></li>
+              <li class="task-item"><input type="checkbox" id="p4_k1"><span>בישול מרק ארטישוק ירושלמי (אידוי בחמאה), טחינה וסינון בשינואה.</span></li>
               <li class="task-item"><input type="checkbox" id="p4_k2"><span><strong>צ'יפס פריך בטיגון עמוק:</strong> פריסה דקיקה במנדולינה, טיגון עמוק להזהבה והמלחה קלה.</span></li>
               <li class="task-item"><input type="checkbox" id="p4_k3"><span>הכנת מקציף חלב, שמן כמהין ועירית קצוצה.</span></li>
             </ul>
@@ -194,6 +214,7 @@
             </ul>
           </div>
         </div>
+        <details class="recipe" data-recipe="artichoke"></details>
       </div>
 
       <!-- מנה 5 -->
@@ -201,12 +222,12 @@
         <h3>מנה 5: איטריות פטריות עשירות &amp; The Forest Manhattan (סט פרחים – מרק)</h3>
         <div class="prep-grid">
           <div class="prep-sub">
-            <div class="prep-sub-title prep-sub-kitchen">🍳 הכנות מטבח (כשר לבשר):</div>
+            <div class="prep-sub-title prep-sub-kitchen">🍳 הכנות מטבח:</div>
             <ul class="task-list">
-              <li class="task-item"><input type="checkbox" id="p5_k1"><span><strong>איטריות תוצרת בית:</strong> הכנה מראש, בישול חצי (אל-דנטה קשה 60–90 שניות), שטיפה ושימון קל בגהי.</span></li>
-              <li class="task-item"><input type="checkbox" id="p5_k2"><span><strong>רוטב בשרי עמוק:</strong> ציר בקר/פטריות פורצ'יני מצומצם מאוד (Glace) מחוזק ביין מדירה/פורט וגהי.</span></li>
-              <li class="task-item"><input type="checkbox" id="p5_k3"><span><strong>פטריות יער:</strong> צריבה חזקה בגהי עם עלי מרווה טריים.</span></li>
-              <li class="task-item"><input type="checkbox" id="p5_k4"><span><strong>פנגריטטה (תחליף פרמז'ן קראנצ'י):</strong> קליית פירורי לחם/פנקו בגהי, שום, שמרי בירה וגרידת לימון. שמירה בצנצנת יבשה.</span></li>
+              <li class="task-item"><input type="checkbox" id="p5_k1"><span><strong>איטריות תוצרת בית:</strong> הכנה מראש, בישול חצי (אל-דנטה קשה 60–90 שניות), שטיפה ושימון קל בחמאה.</span></li>
+              <li class="task-item"><input type="checkbox" id="p5_k2"><span><strong>רוטב בשרי עמוק:</strong> ציר בקר/פטריות פורצ'יני מצומצם מאוד (Glace) מחוזק ביין מדירה/פורט וחמאה.</span></li>
+              <li class="task-item"><input type="checkbox" id="p5_k3"><span><strong>פטריות יער:</strong> צריבה חזקה בחמאה עם עלי מרווה טריים.</span></li>
+              <li class="task-item"><input type="checkbox" id="p5_k4"><span><strong>פנגריטטה (תחליף פרמז'ן קראנצ'י):</strong> קליית פירורי לחם/פנקו בחמאה, שום, שמרי בירה וגרידת לימון. שמירה בצנצנת יבשה.</span></li>
               <li class="task-item"><input type="checkbox" id="p5_k5"><span><strong>עשבי תיבול:</strong> קיצוץ עירית דק ושמירה בקופסה עם נייר לח במקרר.</span></li>
             </ul>
           </div>
@@ -228,7 +249,7 @@
             <div class="prep-sub-title prep-sub-kitchen">🍳 הכנות מטבח:</div>
             <ul class="task-list">
               <li class="task-item"><input type="checkbox" id="p6_k1"><span><strong>בקר בבירה שחורה:</strong> בישול ארוך של הבקר עד רכות מתפרקת, וצמצום הרוטב לזיגוג מבריק וסמיך.</span></li>
-              <li class="task-item"><input type="checkbox" id="p6_k2"><span><strong>אורז:</strong> בישול אורז לבן ריחני (בסמטי/יסמין) ואוורירי עם מעט שמן/גהי.</span></li>
+              <li class="task-item"><input type="checkbox" id="p6_k2"><span><strong>אורז:</strong> בישול אורז לבן ריחני (בסמטי/יסמין) ואוורירי עם מעט שמן/חמאה.</span></li>
               <li class="task-item"><input type="checkbox" id="p6_k3"><span><strong>שאלוט פריך:</strong> טיגון רצועות שאלוט עד פריכות מלאה והזהבה. שמירה בכלי יבש.</span></li>
               <li class="task-item"><input type="checkbox" id="p6_k4"><span><strong>בצל מוחמץ סגול:</strong> כבישה מהירה של רצועות בצל סגול בחומץ תפוחים, מים ומעט סוכר.</span></li>
               <li class="task-item"><input type="checkbox" id="p6_k5"><span>הכנת רינג עגול לצילחות האורז, עירית קצוצה וחוטי צ'ילי/מיקרו ירוק.</span></li>
@@ -248,6 +269,261 @@
     </div>
   </div>
 
+  <!-- TAB: מצרכים -->
+  <div id="dish-shop" class="dish-screen">
+    <div class="dish-header">
+      <div class="dish-title">🛒 רשימת מצרכים לכל המנות</div>
+      <div class="dish-plate">12 סועדים</div>
+    </div>
+
+    <div class="column col-shop-full">
+      <h2>מצרכים לפי מנה</h2>
+      <div class="tl-note">הכמויות לפי המתכונים בדף, בתפוקה שכתובה בכל מתכון. מרק הארטישוק (6–8 כוסיות) ובצק האמפנדס (16–20) לא הוכפלו ל-12 סועדים.</div>
+
+      <div class="prep-dish-card">
+        <h3>🧺 מצרכים משותפים – סיכום</h3>
+        <ul class="task-list">
+          <li class="task-item"><input type="checkbox" id="ic_1"><span><strong>ביצים:</strong> 24 בסה"כ (14 לבנדיקט + 9 להולנדייז + 1 למלית) – לקנות 30</span></li>
+          <li class="task-item"><input type="checkbox" id="ic_2"><span><strong>חמאה:</strong> ~330 גרם במתכונים + מנות 5–6 – לקנות 500 גרם</span></li>
+          <li class="task-item"><input type="checkbox" id="ic_3"><span><strong>גהי:</strong> 375 גרם (להולנדייז בלבד)</span></li>
+          <li class="task-item"><input type="checkbox" id="ic_4"><span><strong>עירית:</strong> למנות 1, 2, 4, 5, 6 – 2–3 חבילות</span></li>
+          <li class="task-item"><input type="checkbox" id="ic_5"><span><strong>שמן לטיגון עמוק</strong> (ציפסר): צ'יפס, פאני פורי, שאלוט, אמפנדס</span></li>
+          <li class="task-item"><input type="checkbox" id="ic_6"><span><strong>קרח</strong> בשפע: לכל 6 המשקאות + ערבוב המנהטן</span></li>
+          <li class="task-item"><input type="checkbox" id="ic_7"><span>מלח דק, פלפל שחור, סולת / קמח תירס</span></li>
+        </ul>
+      </div>
+
+      <div class="prep-dish-card">
+        <h3>מנה 1: אגז בנדיקט, סלמון ותרד &amp; מימוזה</h3>
+        <div class="prep-grid">
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-kitchen">🍳 מטבח:</div>
+              <div class="shop-group">אינגליש מאפינס (12–14 לחמניות)</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i1_1_1"><span>500 גרם קמח</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_1_2"><span>8 גרם שמרים יבשים (או 25 גרם טריים)</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_1_3"><span>30 גרם סוכר</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_1_4"><span>כפית ורבע מלח</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_1_5"><span>240 מ"ל חלב</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_1_6"><span>40 גרם חמאה</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_1_7"><span>50 גרם סולת / קמח תירס</span></li>
+              </ul>
+              <div class="shop-group">הולנדייז (12 מנות)</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i1_2_1"><span>9 ביצים L (לחלמונים)</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_2_2"><span>375 גרם גהי</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_2_3"><span>75–90 מ"ל מיץ לימון טרי (~3 לימונים)</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_2_4"><span>פלפל קאיין או פלפל לבן טחון</span></li>
+              </ul>
+              <div class="shop-group">הרכבה</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i1_3_1"><span>14 ביצים (סו-וויד ועלייה)</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_3_2"><span>סלמון לפריסה דקה – ל-12 מנות</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_3_3"><span>עלי תרד טריים</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_3_4"><span>עירית</span></li>
+              </ul>
+          </div>
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-bar">🍸 בר:</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i1_b1"><span>480 מ"ל מיץ הדרים טרי (תפוז דם / אשכוליות)</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_b2"><span>קואנטרו (60 מ"ל)</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_b3"><span>אנגוסטורה ביטרס</span></li>
+                <li class="task-item"><input type="checkbox" id="i1_b4"><span>יין מבעבע יבש – 2 בקבוקים (900 מ"ל)</span></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="prep-dish-card">
+        <h3>מנה 2: סביצ'ה בפאני פורי, קציפת פרמז'ן &amp; ג'ין טוניק</h3>
+        <div class="prep-grid">
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-kitchen">🍳 מטבח:</div>
+              <div class="shop-group">סביצ'ה ופאני פורי</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i2_1_1"><span>כדורי פאני פורי (12 ומעלה, עם רזרבה לשבורים)</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_1_2"><span>דג ים טרי לסביצ'ה – ל-12 מנות</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_1_3"><span>פלפלים צהובים קטנים (לטבעות המעמד ולסביצ'ה)</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_1_4"><span>עגבניות</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_1_5"><span>בצל</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_1_6"><span>כוסברה</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_1_7"><span>פטרוזיליה</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_1_8"><span>צ'ילי אדום חריף</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_1_9"><span>שמן זית</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_1_10"><span>יוזו או ליים</span></li>
+              </ul>
+              <div class="shop-group">קציפה וקישוט</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i2_2_1"><span>פרמז'ן (לקציפה)</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_2_2"><span>מחסנית גז לסיפון (אם מקציפים בסיפון)</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_2_3"><span>פרחי מאכל</span></li>
+              </ul>
+          </div>
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-bar">🍸 בר:</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i2_b1"><span>ג'ין איכותי (480 מ"ל – בקבוק)</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_b2"><span>טוניק פרימיום (~1.2 ליטר)</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_b3"><span>רוזמרין טרי</span></li>
+                <li class="task-item"><input type="checkbox" id="i2_b4"><span>אשכולית / ליים לפרוסות</span></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="prep-dish-card">
+        <h3>מנה 3: אמפנדס בקר, רוטב תירס שרוף &amp; פרנט קולה</h3>
+        <div class="prep-grid">
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-kitchen">🍳 מטבח:</div>
+              <div class="shop-group">בצק וודקה (16–20 מיני-אמפנדס)</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i3_1_1"><span>250 גרם קמח לבן</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_1_2"><span>50 מ"ל וודקה (ללא טעמים)</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_1_3"><span>60 גרם שומן בקר מזוקק או חמאה קרה</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_1_4"><span>1/2 כפית סוכר</span></li>
+              </ul>
+              <div class="shop-group">מלית בקר</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i3_2_1"><span>250 גרם בקר (שייטל / סינטה / צלעות)</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_2_2"><span>1 בצל לבן גדול</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_2_3"><span>2 כפות שומן בקר או שמן זית</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_2_4"><span>כמון טחון</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_2_5"><span>פפריקה מתוקה (ו/או מעושנת)</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_2_6"><span>פתיתי צ'ילי</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_2_7"><span>אורגנו יבש</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_2_8"><span>50 מ"ל ציר בקר</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_2_9"><span>1 ביצה (קשה)</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_2_10"><span>6–8 זיתים ירוקים</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_2_11"><span>2 גבעולי בצל ירוק</span></li>
+              </ul>
+              <div class="shop-group">רוטב תירס, צ'ימיצ'ורי ועמבה</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i3_3_1"><span>300 גרם גרגירי תירס (טרי או קפוא)</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_3_2"><span>200 גרם חמאה</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_3_3"><span>פטרוזיליה, שום, אורגנו וחומץ לצ'ימיצ'ורי</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_3_4"><span>עמבה + בקבוקן (squeeze)</span></li>
+              </ul>
+          </div>
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-bar">🍸 בר:</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i3_b1"><span>פרנט ברנקה (~420 מ"ל – בקבוק)</span></li>
+                <li class="task-item"><input type="checkbox" id="i3_b2"><span>קוקה קולה (~2 ליטר)</span></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="prep-dish-card">
+        <h3>מנה 4: קפוצ'ינו ארטישוק ירושלמי &amp; שרי / סאקה</h3>
+        <div class="prep-grid">
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-kitchen">🍳 מטבח:</div>
+              <div class="shop-group">מרק (המתכון ל-6–8 כוסיות)</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i4_1_1"><span>500 גרם ארטישוק ירושלמי + 1 נוסף לצ'יפס</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_1_2"><span>1 שאלוט גדול</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_1_3"><span>1 כרישה קטנה</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_1_4"><span>30 גרם חמאה</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_1_5"><span>500 מ"ל ציר ירקות</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_1_6"><span>120 מ"ל שמנת מתוקה 38%</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_1_7"><span>1 שן שום</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_1_8"><span>פלפל לבן</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_1_9"><span>שמן כמהין</span></li>
+              </ul>
+              <div class="shop-group">קצף וצ'יפס</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i4_2_1"><span>150 מ"ל חלב</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_2_2"><span>אגוז מוסקט</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_2_3"><span>מלח מאלדון</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_2_4"><span>עירית</span></li>
+              </ul>
+          </div>
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-bar">🍸 בר:</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i4_b1"><span>שרי פינו (540 מ"ל – בקבוק)</span></li>
+                <li class="task-item"><input type="checkbox" id="i4_b2"><span>ו/או סאקה Junmai</span></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="prep-dish-card">
+        <h3>מנה 5: איטריות פטריות עשירות &amp; The Forest Manhattan</h3>
+        <div class="prep-grid">
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-kitchen">🍳 מטבח:</div>
+              <div class="shop-group">איטריות ורוטב</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i5_1_1"><span>מצרכי בצק איטריות (אין מתכון בדף)</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_1_2"><span>ציר בקר</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_1_3"><span>פטריות פורצ'יני מיובשות</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_1_4"><span>יין מדירה או פורט</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_1_5"><span>חמאה</span></li>
+              </ul>
+              <div class="shop-group">פטריות וקראנץ'</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i5_2_1"><span>פטריות יער</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_2_2"><span>מרווה טרייה</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_2_3"><span>פנקו / פירורי לחם</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_2_4"><span>שום</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_2_5"><span>שמרי בירה</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_2_6"><span>לימון (לגרידה)</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_2_7"><span>עירית</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_2_8"><span>שמן כמהין</span></li>
+              </ul>
+          </div>
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-bar">🍸 בר:</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i5_b1"><span>ריי וויסקי (450 מ"ל)</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_b2"><span>ורמוט אדום (180 מ"ל)</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_b3"><span>Cynar (120 מ"ל)</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_b4"><span>אנגוסטורה ביטרס</span></li>
+                <li class="task-item"><input type="checkbox" id="i5_b5"><span>תפוזים (לסרטי קליפה)</span></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="prep-dish-card">
+        <h3>מנה 6: ערימת אורז, בקר בבירה &amp; Dark &amp; Stormy</h3>
+        <div class="prep-grid">
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-kitchen">🍳 מטבח:</div>
+              <div class="shop-group">בקר ואורז</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i6_1_1"><span>בקר לבישול ארוך – ל-12 מנות</span></li>
+                <li class="task-item"><input type="checkbox" id="i6_1_2"><span>בירה שחורה</span></li>
+                <li class="task-item"><input type="checkbox" id="i6_1_3"><span>אורז בסמטי / יסמין</span></li>
+                <li class="task-item"><input type="checkbox" id="i6_1_4"><span>חמאה או שמן</span></li>
+              </ul>
+              <div class="shop-group">קישוטים</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i6_2_1"><span>שאלוט (לטיגון פריך)</span></li>
+                <li class="task-item"><input type="checkbox" id="i6_2_2"><span>בצל סגול</span></li>
+                <li class="task-item"><input type="checkbox" id="i6_2_3"><span>חומץ תפוחים</span></li>
+                <li class="task-item"><input type="checkbox" id="i6_2_4"><span>סוכר</span></li>
+                <li class="task-item"><input type="checkbox" id="i6_2_5"><span>עירית</span></li>
+                <li class="task-item"><input type="checkbox" id="i6_2_6"><span>חוטי צ'ילי / מיקרו ירוק</span></li>
+              </ul>
+          </div>
+          <div class="prep-sub">
+            <div class="prep-sub-title prep-sub-bar">🍸 בר:</div>
+              <ul class="task-list">
+                <li class="task-item"><input type="checkbox" id="i6_b1"><span>רום כהה (~660 מ"ל – בקבוק)</span></li>
+                <li class="task-item"><input type="checkbox" id="i6_b2"><span>ג'ינג'ר ביר חריף (1.2 ליטר)</span></li>
+                <li class="task-item"><input type="checkbox" id="i6_b3"><span>10–12 ליים (180 מ"ל מיץ + 12 גלגלים)</span></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- TAB: ציר זמן -->
   <div id="dish-run" class="dish-screen">
     <div class="dish-header">
@@ -259,11 +535,13 @@
       <h2>🌙 ערב לפני האירוע – מ-21:00</h2>
       <div class="tl-note">הבקר בבירה מתבשל ברקע בזמן שעובדים על הבצקים. בצק הבריוש לאינגליש מאפינס מתפיח 12 שעות במקרר.</div>
       <ul class="task-list tl-list">
-        <li class="task-item"><input type="checkbox" id="rn_1"><span><b class="tl-time">21:00</b> 🍳 <strong>בצק בריוש לאינגליש מאפינס:</strong> 500 גרם קמח, שמרים, סוכר, מלח, חלב, מים, 40 גרם גהי. לישה עד בצק חלק ואלסטי, כיסוי והכנסה למקרר להתפחה של 12 שעות.</span></li>
+        <li class="task-item"><input type="checkbox" id="rn_1"><span><b class="tl-time">21:00</b> 🍳 <strong>בצק בריוש לאינגליש מאפינס:</strong> 500 גרם קמח, 8 גרם שמרים יבשים, 30 גרם סוכר, כפית ורבע מלח, 240 מ"ל חלב חמים, 140 מ"ל מים, 40 גרם חמאה רכה מאוד. לישה 8–10 דק' לבצק רך ודביק, כדור בקערה משומנת, למקרר להתפחה של 12 שעות.</span></li>
+        <li class="tl-recipe"><details class="recipe" data-recipe="muffins"></details></li>
         <li class="task-item"><input type="checkbox" id="rn_2"><span><b class="tl-time">21:25</b> 🍳 <strong>בקר בבירה:</strong> צריבת הבשר, הוספת הבירה השחורה והכנסה לבישול ארוך על אש נמוכה (כ-2.5–3 שעות).</span></li>
-        <li class="task-item"><input type="checkbox" id="rn_3"><span><b class="tl-time">21:50</b> 🍳 <strong>בצק אמפנדס (בצק וודקה):</strong> הכנה, עטיפה ומנוחה במקרר.</span></li>
-        <li class="task-item"><input type="checkbox" id="rn_4"><span><b class="tl-time">22:05</b> 🍳 <strong>מלית בקר לאמפנדס:</strong> בישול וצינון מלא לפני המילוי.</span></li>
-        <li class="task-item"><input type="checkbox" id="rn_5"><span><b class="tl-time">22:50</b> 🍳 <strong>הרכבת אמפנדס:</strong> רידוד ל-1.5 מ"מ, חיתוך עיגולים, מילוי, סגירה וקיפול. מגש מכוסה למקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rn_3"><span><b class="tl-time">21:50</b> 🍳 <strong>בצק אמפנדס (בצק וודקה):</strong> הכנה, עטיפה ומנוחה במקרר לשעה לפחות.</span></li>
+        <li class="tl-recipe"><details class="recipe" data-recipe="empanadas"></details></li>
+        <li class="task-item"><input type="checkbox" id="rn_4"><span><b class="tl-time">22:05</b> 🍳 <strong>מלית בקר לאמפנדס:</strong> בישול ביצה קשה, בישול המלית וצינון מלא על מגש רחב. רק כשקרה: קיפול ביצה, זיתים ובצל ירוק.</span></li>
+        <li class="task-item"><input type="checkbox" id="rn_5"><span><b class="tl-time">23:15</b> 🍳 <strong>הרכבת אמפנדס</strong> (רק עם מלית קרה לחלוטין): רידוד ל-1.5–2 מ"מ, עיגולים 8–9 ס"מ, מילוי, סגירה ב-Repulgue. מגש מכוסה למקרר.</span></li>
         <li class="task-item"><input type="checkbox" id="rn_6"><span><b class="tl-time">00:15</b> 🍳 <strong>בקר בבירה:</strong> בדיקת רכות, צמצום הרוטב לזיגוג, צינון והכנסה למקרר.</span></li>
         <li class="task-item"><input type="checkbox" id="rn_7"><span><b class="tl-time">00:20</b> 🍸 <strong>למקרר:</strong> קוקה קולה, יין מבעבע, טוניק, ג'ינג'ר ביר, שרי פינו. הכנת קרח בשפע במקפיא.</span></li>
       </ul>
@@ -273,19 +551,22 @@
       <h2>☀️ יום האירוע – הכנות במהלך היום</h2>
       <div class="tl-note">כל הטיגונים מרוכזים בסבב אחד (13:30), והחיתוכים והקישוטים בסבב אחר הצהריים.</div>
       <ul class="task-list tl-list">
-        <li class="task-item"><input type="checkbox" id="rd_1"><span><b class="tl-time">09:00</b> 🍳 <strong>אינגליש מאפינס (בריוש):</strong> הוצאה מהמקרר, חלוקה ועיצוב עיגולים על סולת/קמח תירס, התפחה שנייה (~1.5–2 שעות).</span></li>
-        <li class="task-item"><input type="checkbox" id="rd_3"><span><b class="tl-time">10:00</b> 🍳 <strong>בצק איטריות:</strong> לישה, עטיפה ומנוחה 30 דק'.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_1"><span><b class="tl-time">09:00</b> 🍳 <strong>אינגליש מאפינס (בריוש) – עיצוב:</strong> הפיכת הבצק בעדינות למשטח מקומח בלי להוציא אוויר, שיטוח בידיים לעובי 2–2.5 ס"מ, קריצת עיגולים 7–7.5 ס"מ, הנחה על תבנית עם סולת. חצי התפחה ~30–45 דק' (בצק קר מהמקרר).</span></li>
+        <li class="tl-recipe"><details class="recipe" data-recipe="muffins"></details></li>
+        <li class="task-item"><input type="checkbox" id="rd_8"><span><b class="tl-time">09:45</b> 🍳 <strong>אינגליש מאפינס – קלייה:</strong> מחבת עם מכסה על להבה בינונית-נמוכה, 4–5 לחמניות בכל סבב: 7–10 דק' מצד ראשון, 5–7 דק' מצד שני. צינון על רשת מכוסה במגבת. (~3 סבבים, עד ~10:45)</span></li>
         <li class="task-item"><input type="checkbox" id="rd_4"><span><b class="tl-time">10:15</b> 🍳 <strong>רוטב איטריות:</strong> ציר בקר/פורצ'יני ויין מדירה/פורט לצמצום ארוך (Glace) על אש נמוכה.</span></li>
-        <li class="task-item"><input type="checkbox" id="rd_5"><span><b class="tl-time">10:30</b> 🍳 <strong>הכנת האיטריות:</strong> רידוד וחיתוך, בישול חצי 60–90 שניות, שטיפה ושימון קל בגהי. קופסה למקרר.</span></li>
-        <li class="task-item"><input type="checkbox" id="rd_8"><span><b class="tl-time">11:00</b> 🍳 <strong>אינגליש מאפינס:</strong> בישול במחבת על אש בינונית-נמוכה עד הזהבה משני הצדדים. צינון ואחסון סגור.</span></li>
-        <li class="task-item"><input type="checkbox" id="rd_9"><span><b class="tl-time">12:00</b> 🍳 <strong>שום קונפי</strong> (לרוטב התירס) על אש נמוכה מאוד.</span></li>
-        <li class="task-item"><input type="checkbox" id="rd_10"><span><b class="tl-time">12:00</b> 🍳 <strong>מרק ארטישוק ירושלמי:</strong> אידוי בגהי, בישול, טחינה וסינון בשינואה. צינון ולמקרר.</span></li>
-        <li class="task-item"><input type="checkbox" id="rd_11"><span><b class="tl-time">12:45</b> 🍳 <strong>רוטב תירס שרוף:</strong> צריבת תירס באש חיה, טחינה חלקה עם שום קונפי וציר, סינון. למקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_3"><span><b class="tl-time">10:50</b> 🍳 <strong>בצק איטריות:</strong> לישה, עטיפה ומנוחה 30 דק'.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_5"><span><b class="tl-time">11:20</b> 🍳 <strong>הכנת האיטריות:</strong> רידוד וחיתוך, בישול חצי 60–90 שניות, שטיפה ושימון קל בחמאה. קופסה למקרר. <strong>לשמור 2 כוסות ממי הבישול לרוטב התירס.</strong></span></li>
+        <li class="task-item"><input type="checkbox" id="rd_10"><span><b class="tl-time">12:00</b> 🍳 <strong>מרק ארטישוק ירושלמי:</strong> אידוי בחמאה, בישול, טחינה וסינון בשינואה. צינון ולמקרר.</span></li>
+        <li class="tl-recipe"><details class="recipe" data-recipe="artichoke"></details></li>
+        <li class="task-item"><input type="checkbox" id="rd_11"><span><b class="tl-time">12:45</b> 🍳 <strong>רוטב תירס שרוף:</strong> חריכת 300 גרם תירס במחבת יבשה לוהטת ~10 דק', טחינה עם 2 כוסות ממי בישול האיטריות, הסמכה הדרגתית ב-200 גרם חמאה קרה לאמולסיה, מלח ופלפל. למקרר.</span></li>
+        <li class="tl-recipe"><details class="recipe" data-recipe="corn"></details></li>
         <li class="task-item tl-item-alert"><input type="checkbox" id="rd_12"><span><b class="tl-time">13:15</b> 🔥 <strong>הדלקת הציפסר לסבב טיגונים</strong> (180°C).</span></li>
-        <li class="task-item"><input type="checkbox" id="rd_13"><span><b class="tl-time">13:30</b> 🍳 <strong>סבב טיגונים:</strong> כדורי פאני פורי ← צ'יפס ארטישוק (מנדולינה, המלחה קלה) ← שאלוט פריך. כל אחד לכלי יבש ואטום. כיבוי הציפסר.</span></li>
-        <li class="task-item"><input type="checkbox" id="rd_14"><span><b class="tl-time">14:30</b> 🍳 <strong>פנגריטטה:</strong> פנקו בגהי, שום, שמרי בירה וגרידת לימון. לצנצנת יבשה.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_13"><span><b class="tl-time">13:30</b> 🍳 <strong>סבב טיגונים:</strong> צ'יפס ארטישוק ראשון ב-160°C (מנדולינה, ייבוש, המלחה מיד) ← העלאה ל-180°C: כדורי פאני פורי ← שאלוט פריך. כל אחד לכלי יבש ואטום. כיבוי הציפסר.</span></li>
+        <li class="tl-recipe"><details class="recipe" data-recipe="artichoke"></details></li>
+        <li class="task-item"><input type="checkbox" id="rd_14"><span><b class="tl-time">14:30</b> 🍳 <strong>פנגריטטה:</strong> פנקו בחמאה, שום, שמרי בירה וגרידת לימון. לצנצנת יבשה.</span></li>
         <li class="task-item"><input type="checkbox" id="rd_15"><span><b class="tl-time">14:45</b> 🍳 <strong>בצל סגול מוחמץ:</strong> רצועות דקות בחומץ תפוחים, מים ומעט סוכר.</span></li>
-        <li class="task-item"><input type="checkbox" id="rd_16"><span><b class="tl-time">15:00</b> 🍳 <strong>פטריות יער:</strong> צריבה חזקה בגהי עם עלי מרווה. צינון ולמקרר.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_16"><span><b class="tl-time">15:00</b> 🍳 <strong>פטריות יער:</strong> צריבה חזקה בחמאה עם עלי מרווה. צינון ולמקרר.</span></li>
         <li class="task-item"><input type="checkbox" id="rd_17"><span><b class="tl-time">15:20</b> 🍳 <strong>צ'ימיצ'ורי:</strong> פטרוזיליה, שום, אורגנו, צ'ילי, חומץ ושמן זית.</span></li>
         <li class="task-item"><input type="checkbox" id="rd_30"><span><b class="tl-time">15:30</b> 🍳 <strong>בקבוקן עמבה:</strong> מילוי הבקבוקן ברוטב עמבה (ערבוב/סינון לזרימה חלקה). לאמפנדס.</span></li>
         <li class="task-item"><input type="checkbox" id="rd_18"><span><b class="tl-time">15:35</b> 🍳 <strong>סבב חיתוכים – מטבח:</strong> פריסת סלמון דק · טבעות פלפל צהוב (מעמד לפאני פורי) · ירקות לסביצ'ה (פלפל צהוב, עגבניות ללא מיץ, בצל, כוסברה, פטרוזיליה, צ'ילי) · עירית קצוצה בקופסה עם נייר לח.</span></li>
@@ -294,11 +575,12 @@
         <li class="task-item"><input type="checkbox" id="rd_21"><span><b class="tl-time">16:45</b> 🍸 <strong>סבב חיתוכים – בר:</strong> סחיטה וסינון 480 מ"ל מיץ הדרים · סחיטת 180 מ"ל ליים · 12 גלגלי ליים · סלייסים של אשכולית/ליים ל-G&amp;T · סרטי קליפת תפוז · ענפי רוזמרין.</span></li>
         <li class="task-item"><input type="checkbox" id="rd_22"><span><b class="tl-time">17:15</b> 🍸 <strong>קנקן מימוזה:</strong> 480 מ"ל מיץ + 60 מ"ל קואנטרו + 12 דאש אנגוסטורה. למקרר.</span></li>
         <li class="task-item"><input type="checkbox" id="rd_23"><span><b class="tl-time">17:20</b> 🍸 <strong>קנקן מנהטן:</strong> 450 מ"ל ריי + 180 מ"ל ורמוט אדום + 120 מ"ל Cynar + 12 דאש אנגוסטורה. למקרר.</span></li>
-        <li class="task-item"><input type="checkbox" id="rd_24"><span><b class="tl-time">17:30</b> 🍳 <strong>אורז:</strong> בישול אורז ריחני עם מעט גהי, שמירה מכוסה.</span></li>
-        <li class="task-item"><input type="checkbox" id="rd_25"><span><b class="tl-time">17:45</b> 🍳 <strong>תרד:</strong> אידוי קצר עם כפית גהי, מלח ופלפל.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_24"><span><b class="tl-time">17:30</b> 🍳 <strong>אורז:</strong> בישול אורז ריחני עם מעט חמאה, שמירה מכוסה.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_25"><span><b class="tl-time">17:45</b> 🍳 <strong>תרד:</strong> אידוי קצר עם כפית חמאה, מלח ופלפל.</span></li>
         <li class="task-item"><input type="checkbox" id="rd_26"><span><b class="tl-time">18:00</b> 🍸 <strong>כוסות:</strong> 12 כוסות פלוט למקרר, 12 כוסות קופט למקפיא. בדיקת מלאי קרח.</span></li>
         <li class="task-item"><input type="checkbox" id="rd_27"><span><b class="tl-time">18:10</b> 🍸 <strong>עמדת בר:</strong> ג'ין, פרנט ברנקה, רום כהה, סאקה, כוסות לואובול, הייבול וכוסות חרס, כוס ערבוב, מסננת, ג'יגר.</span></li>
         <li class="task-item"><input type="checkbox" id="rd_28"><span><b class="tl-time">18:20</b> 🍳 <strong>צלחות לפי סדר:</strong> מרובעת · פרחים קטנה · עגולה · כוסית שקופה · פרחים מרק · פרחים גדולה. רינג לאורז.</span></li>
+        <li class="task-item"><input type="checkbox" id="rd_31"><span><b class="tl-time">18:25</b> 🍳 <strong>ציוד הולנדייז:</strong> 🫙 תרמוס רחב נקי · בלנדר מוט · מד-ליטר צר וגבוה · 375 גרם גהי שקול בסיר קטן · מיץ לימון סחוט.</span></li>
         <li class="task-item"><input type="checkbox" id="rd_29"><span><b class="tl-time">18:30</b> 🍳 בקר בבירה מחוץ למקרר, הסרת שומן קרוש מהרוטב.</span></li>
       </ul>
     </div>
@@ -307,9 +589,12 @@
       <h2>🍽️ יום האירוע – הסרוויס (ארוחה 20:00, מנה כל 15 דק')</h2>
       <ul class="task-list tl-list">
         <li class="task-item"><input type="checkbox" id="rs_1"><span><b class="tl-time">18:45</b> 🍳 חימום אמבט סו-וויד ל-62°C.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_31"><span><b class="tl-time">18:45</b> 🍳 9 ביצים להולנדייז מחוץ למקרר (חלמונים בטמפרטורת החדר).</span></li>
         <li class="task-item"><input type="checkbox" id="rs_2"><span><b class="tl-time">19:00</b> 🍳 <strong>ביצים:</strong> 14 ביצים לסו-וויד, 40 דק'.</span></li>
         <li class="task-item"><input type="checkbox" id="rs_3"><span><b class="tl-time">19:15</b> 🍳 <strong>דג לסביצ'ה:</strong> חיתוך לקוביות, ערבוב עם הירקות. בקירור עד ההגשה.</span></li>
-        <li class="task-item"><input type="checkbox" id="rs_4"><span><b class="tl-time">19:30</b> 🍳 <strong>הולנדייז גהי:</strong> 4 חלמונים + 20 מ"ל מים בבן-מארי, זילוף 180 גרם גהי. שמירה חמימה.</span></li>
+        <li class="task-item tl-item-alert"><input type="checkbox" id="rs_32"><span><b class="tl-time">19:20</b> 🫙 <strong>לחמם את התרמוס:</strong> מילוי במים רותחים.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_4"><span><b class="tl-time">19:30</b> 🍳 <strong>הולנדייז גהי בבלנדר מוט:</strong> 9 חלמונים, מים, לימון, מלח וקאיין במד-ליטר. גהי ל-75°C בזרם דק. ריקון התרמוס והעברת הרוטב מיד לתרמוס.</span></li>
+        <li class="tl-recipe"><details class="recipe" data-recipe="hollandaise"></details></li>
         <li class="task-item"><input type="checkbox" id="rs_5"><span><b class="tl-time">19:40</b> 🍳 הוצאת הביצים לקירור. 3 סירים על הכיריים ל-85°C. קליית אינגליש מאפינס.</span></li>
         <li class="task-item"><input type="checkbox" id="rs_7"><span><b class="tl-time">19:55</b> 🍸 <strong>מימוזה:</strong> 45 מ"ל מהקנקן + 75 מ"ל מבעבע קר לכוסות הפלוט.</span></li>
         <li class="task-item tl-item-alert"><input type="checkbox" id="rs_8"><span><b class="tl-time">20:00</b> 🔥 <strong>הדלקת תנור</strong> (למנה הנוספת שלא במסך).</span></li>
@@ -318,16 +603,19 @@
         <li class="task-item"><input type="checkbox" id="rs_11"><span><b class="tl-time">20:08</b> 🍳 תיבול סביצ'ה (שמן זית, יוזו/ליים, מלח) ומילוי כדורי פאני פורי.</span></li>
         <li class="task-item"><input type="checkbox" id="rs_12"><span><b class="tl-time">20:10</b> 🍸 <strong>G&amp;T:</strong> קרח, 40 מ"ל ג'ין, 80–100 מ"ל טוניק, חריכת רוזמרין ופרוסת הדר.</span></li>
         <li class="task-item tl-item-serve"><input type="checkbox" id="rs_13"><span><b class="tl-time">20:15</b> 🍽️ <strong>מנה 2 – סביצ'ה פאני פורי &amp; G&amp;T</strong></span></li>
-        <li class="task-item"><input type="checkbox" id="rs_14"><span><b class="tl-time">20:18</b> 🍳 חימום רוטב תירס שרוף. בדיקת מד-חום בציפסר (180°C).</span></li>
-        <li class="task-item"><input type="checkbox" id="rs_16"><span><b class="tl-time">20:23</b> 🍳 <strong>טיגון אמפנדס</strong> 2–3 דק' עד הזהבה. צילחות: פס רוטב תירס, אמפנדס, צ'ימיצ'ורי ונקודות עמבה מהבקבוקן.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_14"><span><b class="tl-time">20:18</b> 🍳 חימום רוטב תירס שרוף על אש עדינה תוך ערבוב – לא להרתיח (האמולסיה עלולה להיפרד). בדיקת מד-חום בציפסר (180°C).</span></li>
+        <li class="tl-recipe"><details class="recipe" data-recipe="corn"></details></li>
+        <li class="task-item"><input type="checkbox" id="rs_16"><span><b class="tl-time">20:20</b> 🍳 <strong>טיגון אמפנדס</strong> ב-180°C, 2–3 דק' מכל צד עד הזהבה ובועיות. צילחות: פס רוטב תירס, אמפנדס, צ'ימיצ'ורי ונקודות עמבה מהבקבוקן.</span></li>
+        <li class="tl-recipe"><details class="recipe" data-recipe="empanadas"></details></li>
         <li class="task-item"><input type="checkbox" id="rs_17"><span><b class="tl-time">20:25</b> 🍸 <strong>פרנט קולה:</strong> לואובול מלא קרח, 30–40 מ"ל פרנט, קולה ביציקה אלכסונית לקצף.</span></li>
         <li class="task-item tl-item-serve"><input type="checkbox" id="rs_18"><span><b class="tl-time">20:30</b> 🍽️ <strong>מנה 3 – אמפנדס &amp; פרנט קולה</strong></span></li>
         <li class="task-item"><input type="checkbox" id="rs_19"><span><b class="tl-time">20:30</b> 🍸 אמבט מים חמימים לסאקה (45°C).</span></li>
         <li class="task-item"><input type="checkbox" id="rs_20"><span><b class="tl-time">20:33</b> 🍳 חימום מרק ארטישוק והקצפת חלב עם אגוז מוסקט.</span></li>
+        <li class="tl-recipe"><details class="recipe" data-recipe="artichoke"></details></li>
         <li class="task-item tl-item-alert"><input type="checkbox" id="rs_21"><span><b class="tl-time">20:40</b> 💧 <strong>הרתחת מים לאיטריות.</strong> חימום הבקר בבירה על אש נמוכה + חימום האורז.</span></li>
         <li class="task-item"><input type="checkbox" id="rs_22"><span><b class="tl-time">20:42</b> 🍸 מזיגת שרי פינו קר (45 מ"ל) / סאקה חם לכוסות חרס.</span></li>
         <li class="task-item tl-item-serve"><input type="checkbox" id="rs_23"><span><b class="tl-time">20:45</b> 🍽️ <strong>מנה 4 – קפוצ'ינו ארטישוק &amp; שרי/סאקה</strong></span></li>
-        <li class="task-item"><input type="checkbox" id="rs_24"><span><b class="tl-time">20:50</b> 🍳 חליטת איטריות, הקפצה עם הפטריות בציר המצומצם וכפית גהי.</span></li>
+        <li class="task-item"><input type="checkbox" id="rs_24"><span><b class="tl-time">20:50</b> 🍳 חליטת איטריות, הקפצה עם הפטריות בציר המצומצם וכפית חמאה.</span></li>
         <li class="task-item"><input type="checkbox" id="rs_25"><span><b class="tl-time">20:55</b> 🍸 <strong>מנהטן:</strong> ערבוב מהקנקן עם קרח, סינון לקופטים מהמקפיא, זסט תפוז.</span></li>
         <li class="task-item tl-item-serve"><input type="checkbox" id="rs_26"><span><b class="tl-time">21:00</b> 🍽️ <strong>מנה 5 – איטריות פטריות &amp; מנהטן</strong></span></li>
         <li class="task-item"><input type="checkbox" id="rs_27"><span><b class="tl-time">21:05</b> 🍳 הידוק אורז ברינג, הנחת בקר ורוטב, שאלוט פריך, בצל מוחמץ ועירית.</span></li>
@@ -350,12 +638,13 @@
         <img class="card-banner-img" src="./index_files/photo-1608039829572-78524f79c4c7" alt="Eggs Benedict">
         <div class="step-box chef-note">
           <div class="step-title">💡 התאמות שף:</div>
-          <div>בסיס אינגליש מאפין מבוסס גהי, פרוסות סלמון דקות ותרד חלוט ומתובל קלות בגהי.</div>
+          <div>בסיס אינגליש מאפין, פרוסות סלמון דקות ותרד חלוט ומתובל קלות בחמאה.</div>
         </div>
+        <details class="recipe" data-recipe="muffins"></details>
         <div class="step-box prep">
           <div class="step-title">1. פעילות קדם &amp; אינגליש מאפינס</div>
           <ul class="task-list">
-            <li class="task-item"><input type="checkbox" id="d1_k1"><span>אינגליש מאפינס אפויים מראש (גהי במקום חמאה), חצויים במזלג.</span></li>
+            <li class="task-item"><input type="checkbox" id="d1_k1"><span>אינגליש מאפינס מוכנים מראש, חצויים במזלג.</span></li>
             <li class="task-item"><input type="checkbox" id="d1_k2"><span>קליה קלה על פלנצ'ה/מחבת יבשה לפריכות.</span></li>
             <li class="task-item"><input type="checkbox" id="d1_k3"><span>סו-וויד: 12–14 ביצים ב-62°C למשך 40 דק'. קירור מידי.</span></li>
             <li class="task-item"><input type="checkbox" id="d1_k4"><span>פריסת סלמון דק ואידוי מהיר של עלי התרד.</span></li>
@@ -369,11 +658,13 @@
           </ul>
         </div>
         <div class="step-box prep">
-          <div class="step-title">3. הולנדייז גהי חי (12 מנות)</div>
+          <div class="step-title">3. הולנדייז גהי בבלנדר מוט (12 מנות)</div>
           <ul class="task-list">
-            <li class="task-item"><input type="checkbox" id="d1_k7"><span>4 חלמונים + 20 מ"ל מים בבן-מארי עד תפיחה והסמכה.</span></li>
-            <li class="task-item"><input type="checkbox" id="d1_k8"><span>זילוף 180 גרם גהי (Ghee) חמים בזרם דק תוך טריפה מתמדת. לימון ומלח.</span></li>
+            <li class="task-item"><input type="checkbox" id="d1_k7"><span>🫙 <strong>תרמוס רחב:</strong> מילוי במים רותחים לחימום, ריקון רגע לפני שהרוטב מוכן.</span></li>
+            <li class="task-item"><input type="checkbox" id="d1_k10"><span>בכלי גבוה וצר: 9 חלמונים, 90 מ"ל מים חמימים, 75–90 מ"ל לימון, מלח וקאיין. חימום 375 גרם גהי ל-75°C.</span></li>
+            <li class="task-item"><input type="checkbox" id="d1_k8"><span>בלנדר מוט צמוד לתחתית בעוצמה מלאה, זרם גהי דק ורציף. בסוף העלאה והורדה. תיקון תיבול והעברה מיד לתרמוס.</span></li>
           </ul>
+          <details class="recipe" data-recipe="hollandaise"></details>
         </div>
         <div class="step-box">
           <div class="step-title">4. צלחות (צלחת מרובעת)</div>
@@ -482,11 +773,13 @@
           <div class="step-title">💡 התאמות שף:</div>
           <div>בצק וודקה פריך, צילחות מעל רוטב תירס שרוף עשיר ומקורמל, נקודות עמבה מבקבוקן.</div>
         </div>
+        <details class="recipe" data-recipe="empanadas"></details>
+        <details class="recipe" data-recipe="corn"></details>
         <div class="step-box prep">
           <div class="step-title">1. פעילות קדם</div>
           <ul class="task-list">
             <li class="task-item"><input type="checkbox" id="d3_k1"><span>בצק וודקה ממולא במלית בקר, מקופל ומוכן בקירור.</span></li>
-            <li class="task-item"><input type="checkbox" id="d3_k2"><span><strong>רוטב תירס שרוף:</strong> צריבת גרגרי תירס במחבת/אש עזה, טחינה עם מעט שום קונפי וציר לקרם חלק. שמירה חם.</span></li>
+            <li class="task-item"><input type="checkbox" id="d3_k2"><span><strong>רוטב תירס שרוף:</strong> חריכת גרגרי תירס במחבת יבשה לוהטת, טחינה עם מי בישול והסמכה בחמאה קרה לאמולסיה קרמית. חימום עדין לפני ההגשה.</span></li>
             <li class="task-item"><input type="checkbox" id="d3_k3"><span>הכנת צ'ימיצ'ורי טרי וחמצמץ.</span></li>
             <li class="task-item"><input type="checkbox" id="d3_k6"><span>בקבוקן עמבה מוכן ליד עמדת הצילחות.</span></li>
           </ul>
@@ -531,12 +824,13 @@
         <img class="card-banner-img" src="./index_files/jerusalem-artichoke-soup.jpg" alt="Artichoke Cappuccino">
         <div class="step-box chef-note">
           <div class="step-title">💡 התאמות שף:</div>
-          <div>אידוי בסיס המרק בגהי, צ'יפס ארטישוק פריך בטיגון עמוק.</div>
+          <div>אידוי בסיס המרק בחמאה, צ'יפס ארטישוק פריך בטיגון עמוק.</div>
         </div>
+        <details class="recipe" data-recipe="artichoke"></details>
         <div class="step-box prep">
           <div class="step-title">1. פעילות קדם</div>
           <ul class="task-list">
-            <li class="task-item"><input type="checkbox" id="d4_k1"><span>מרק ארטישוק ירושלמי (מאודה ב-Ghee) טחון ומסונן בשינואה בסיר חם.</span></li>
+            <li class="task-item"><input type="checkbox" id="d4_k1"><span>מרק ארטישוק ירושלמי (מאודה בחמאה) טחון ומסונן בשינואה בסיר חם.</span></li>
             <li class="task-item"><input type="checkbox" id="d4_k2"><span><strong>צ'יפס פריך בטיגון:</strong> טיגון פרוסות דקיקות במנדולינה בשמן עמוק עד קראנץ' מוזהב והמלחה קלה.</span></li>
           </ul>
         </div>
@@ -580,22 +874,22 @@
         <h2>🍳 צד ימין: הכנת המנה (איטריות תוצרת בית)</h2>
         <img class="card-banner-img" src="./index_files/mushroom-noodles.jpg" alt="Mushroom Noodles">
         <div class="step-box chef-note">
-          <div class="step-title">💡 התאמות שף (כשר לבשר):</div>
-          <div>איטריות טריות עבודת יד, רוטב ציר בקר ופטריות מרוכז (ללא חלב), פנגריטטה קראנצ'ית מראש.</div>
+          <div class="step-title">💡 התאמות שף:</div>
+          <div>איטריות טריות עבודת יד, רוטב ציר בקר ופטריות מרוכז, פנגריטטה קראנצ'ית מראש.</div>
         </div>
         <div class="step-box prep">
           <div class="step-title">1. פעילות קדם</div>
           <ul class="task-list">
-            <li class="task-item"><input type="checkbox" id="d5_k1"><span>איטריות טריות מבושלות חצי בישול, מסוננות ומשומנות קלות בגהי.</span></li>
+            <li class="task-item"><input type="checkbox" id="d5_k1"><span>איטריות טריות מבושלות חצי בישול, מסוננות ומשומנות קלות בחמאה.</span></li>
             <li class="task-item"><input type="checkbox" id="d5_k2"><span>ציר פטריות ובקר עמוק ומצומצם (Glace) מחוזק ביין מדירה/פורט.</span></li>
-            <li class="task-item"><input type="checkbox" id="d5_k3"><span>פטריות יער צרובות היטב בגהי עם עלי מרווה.</span></li>
+            <li class="task-item"><input type="checkbox" id="d5_k3"><span>פטריות יער צרובות היטב בחמאה עם עלי מרווה.</span></li>
             <li class="task-item"><input type="checkbox" id="d5_k4"><span>פנגריטטה פריכה מוכנה בצנצנת + עירית קצוצה דק במקרר.</span></li>
           </ul>
         </div>
         <div class="step-box action">
           <div class="step-title">2. הקפצה והגשה בסרוויס</div>
           <ul class="task-list">
-            <li class="task-item"><input type="checkbox" id="d5_k5"><span>הקפצת האיטריות והפטריות בתוך הציר המצומצם והרותח יחד עם כפית גהי עד ספיגת טעמים וברק.</span></li>
+            <li class="task-item"><input type="checkbox" id="d5_k5"><span>הקפצת האיטריות והפטריות בתוך הציר המצומצם והרותח יחד עם כפית חמאה עד ספיגת טעמים וברק.</span></li>
             <li class="task-item"><input type="checkbox" id="d5_k6"><span>גלגול אלגנטי במלקחיים למרכז צלחת המרק מסט הפרחים.</span></li>
             <li class="task-item"><input type="checkbox" id="d5_k7"><span>פיזור פנגריטטה פריכה מעל, עירית קצוצה וטפטוף שמן כמהין.</span></li>
           </ul>
@@ -670,6 +964,248 @@
       </div>
     </div>
   </div>
+
+  <!-- מתכונים מלאים: מוזרקים לכל <details data-recipe="..."> בדף -->
+  <template id="recipe-artichoke">
+    <summary>📖 מתכון מלא: קפוצ'ינו ארטישוק ירושלמי</summary>
+    <div class="recipe-body">
+      <p>הכנת מרק בסגנון "קפוצ'ינו" מבוססת על מרקם קטיפתי וחלק במיוחד, בליווי שכבת קצף אוורירית ומעליה אלמנט פריך. המנה הזו מצוינת להגשה בכוסות שקופות (כמו כוסות אספרסו או לונגו).</p>
+
+      <h4>מצרכים (לכ-6–8 כוסיות אישיות)</h4>
+      <div class="recipe-sub">לבסיס המרק הקטיפתי:</div>
+      <ul>
+        <li>500 גרם ארטישוק ירושלמי (קלוף וחתוך לקוביות)</li>
+        <li>1 בצל שאלוט גדול (או בצל לבן קטן), קצוץ דק</li>
+        <li>1 כרישה קטנה (החלק הלבן בלבד), פרוסה דק</li>
+        <li>30 גרם חמאה (או 2 כפות שמן זית לגרסה פרווה)</li>
+        <li>500 מ"ל ציר ירקות עדין או מים</li>
+        <li>120 מ"ל שמנת מתוקה (38%) או קרם שקדים/בישול צמחי</li>
+        <li>1 שן שום כתושה</li>
+        <li>מלח דק ופלפל לבן לפי הטעם</li>
+        <li>1 כפית שמן כמהין איכותי (לא חובה, אך מעמיק מאוד את הטעם)</li>
+      </ul>
+      <div class="recipe-sub">לקצף ה"קפוצ'ינו":</div>
+      <ul>
+        <li>150 מ"ל חלב (או חלב שיבולת שועל/שקדים לבריסטה, המקציפים היטב)</li>
+        <li>קורט קטן של מלח ואגוז מוסקט מגורר</li>
+      </ul>
+      <div class="recipe-sub">לצ'יפס הפריך (Garnish):</div>
+      <ul>
+        <li>1 ארטישוק ירושלמי שטוף היטב (אין צורך לקלף)</li>
+        <li>שמן לטיגון עמוק</li>
+        <li>מלח מאלדון / מלח ים אטלנטי</li>
+        <li>עירית קצוצה דק לעיטור</li>
+      </ul>
+
+      <h4>אופן ההכנה</h4>
+      <div class="recipe-sub">1. הכנת הצ'יפס הפריך</div>
+      <ol>
+        <li>בעזרת מנדולינה או קולפן, פורסים את הארטישוק הירושלמי לפרוסות דקיקות ושקופות כמעט.</li>
+        <li>מייבשים את הפרוסות היטב בנייר סופג.</li>
+        <li>מחממים שמן לטיגון (סביב 160°C). מטגנים את הפרוסות עד להזהבה עדינה (הן נשרפות מהר, יש לשים לב).</li>
+        <li>מעבירים לנייר סופג ובוזקים מיד מעט מלח. שומרים בצד.</li>
+      </ol>
+      <div class="recipe-sub">2. בישול המרק</div>
+      <ol>
+        <li>בסיר בינוני ממיסים את החמאה על אש בינונית. מוסיפים את השאלוט והכרישה ומאדים עם קורט מלח כ-5–7 דקות עד לשקיפות וריכוך, ללא השחמה.</li>
+        <li>מוסיפים את השום הכתוש ומערבבים כדקה עד שעולה ריח.</li>
+        <li>מוסיפים את קוביות הארטישוק הירושלמי ומאדים יחד כ-3 דקות.</li>
+        <li>יוצקים את הציר או המים (הנוזל צריך רק לכסות את הירקות). מביאים לרתיחה, מנמיכים את האש, מכסים ומבשלים כ-20–25 דקות, עד שהארטישוק רך לגמרי.</li>
+      </ol>
+      <div class="recipe-sub">3. טחינה ומרקם</div>
+      <ol>
+        <li>טוחנים את המרק בבלנדר חזק (עדיף בלנדר שולחני עוצמתי) במשך 2–3 דקות שלמות כדי להגיע למרקם חלק ואוורירי.</li>
+        <li>מוסיפים את השמנת ושמן הכמהין, ומתבלים במלח ופלפל לבן. טוחנים עוד חצי דקה.</li>
+        <li><strong>שלב קריטי למרקם מושלם:</strong> מעבירים את המרק דרך מסננת דקה (שינואה) חזרה לסיר, לקבלת מרקם משי ללא סיבים. טועמים ומתקנים תיבול במידת הצורך. שומרים חם.</li>
+      </ol>
+      <div class="recipe-sub">4. הכנת הקצף והרכבה</div>
+      <ol>
+        <li>מחממים את החלב עם קורט מלח ומוסקט בסיר קטן (לא להרתיח). מקציפים אותו באמצעות מקציף חלב חשמלי, בלנדר מוט בחלקו העליון של הנוזל, או סטימר קפה, עד לקבלת קצף יציב ודחוס.</li>
+        <li>יוצקים את המרק החם לכוסות אספרסו שקופות עד ל-3/4 מגובה הכוס.</li>
+        <li>מניחים בעדינות כף או שתיים של קצף חלב מעל המרק, בדיוק כמו בקפוצ'ינו אמיתי.</li>
+        <li>מניחים מעל הקצף פרוסת צ'יפס פריכה, מפזרים מעט עירית קצוצה ומגישים מיד עם כפית קטנה.</li>
+      </ol>
+    </div>
+  </template>
+
+  <template id="recipe-empanadas">
+    <summary>📖 מתכון מלא: אמפנדס בקר בבצק וודקה</summary>
+    <div class="recipe-body">
+      <h4>1. הבצק הפריך עם וודקה</h4>
+      <div class="recipe-sub">מצרכים (לכ-16–20 מיני-אמפנדס):</div>
+      <ul>
+        <li>250 גרם קמח לבן (כוס ושלושת-רבעי)</li>
+        <li>50 מ"ל וודקה קרה (ללא טעמים)</li>
+        <li>60–70 מ"ל מים קרים מאוד (לפי ספיגת הקמח)</li>
+        <li>60 גרם שומן בקר מזוקק (Tallow/Lard) או חמאה קרה / שמן צמחי ניטרלי</li>
+        <li>1/2 כפית מלח דק</li>
+        <li>1/2 כפית סוכר (מסייע להשחמה יפה)</li>
+      </ul>
+      <div class="recipe-sub">אופן הכנת הבצק:</div>
+      <ol>
+        <li><strong>ערבוב יבשים ושומן:</strong> בקערה רחבה או במעבד מזון, מערבבים את הקמח, המלח והסוכר. מוסיפים את השומן/חמאה ומעבדים עד לקבלת פירורים דקים (כמו חול רטוב).</li>
+        <li><strong>הוספת הנוזלים:</strong> מערבבים את הוודקה והמים הקרים. יוצקים בהדרגה לתוך הקמח ולשים רק עד שהבצק מתאחד לכדור אחיד, חלק וגמיש יחסית. אם יבש מדי – מוסיפים כפית מים. (חשוב לא ללוש יתר על המידה).</li>
+        <li><strong>מנוחה:</strong> עוטפים בניילון נצמד ומניחים במקרר לשעה לפחות (המנוחה מרפה את הגלוטן ומאפשרת רידוד קל ודק מאוד בהמשך).</li>
+      </ol>
+
+      <h4>2. מלית בקר קלאסית (בסגנון מנדוסה)</h4>
+      <div class="recipe-sub">מצרכים:</div>
+      <ul>
+        <li>250 גרם בשר בקר (שייטל, סינטה או צלעות) קצוץ בסכין לקוביות זעירות (או טחון גס)</li>
+        <li>1 בצל לבן גדול, קצוץ דק מאוד</li>
+        <li>2 כפות שומן בקר או שמן זית</li>
+        <li>1 כפית כמון טחון</li>
+        <li>1 כף פפריקה מתוקה (או חצי מתוקה וחצי מעושנת)</li>
+        <li>קורט פתיתי צ'ילי חריף</li>
+        <li>1/2 כפית אורגנו יבש</li>
+        <li>50 מ"ל ציר בקר עשיר</li>
+        <li>1 ביצה קשה, קצוצה דק</li>
+        <li>6–8 זיתים ירוקים, קצוצים דק</li>
+        <li>2 גבעולי בצל ירוק, קצוצים דק</li>
+        <li>מלח ופלפל שחור גרוס</li>
+      </ul>
+      <div class="recipe-sub">הכנת המלית:</div>
+      <ol>
+        <li>מחממים שומן במחבת רחבה ומטגנים את הבצל על אש בינונית עד להזהבה רכה ושקופה (כ-8–10 דקות).</li>
+        <li>מגבירים את האש, מוסיפים את הבשר וצורבים במהירות תוך כדי ערבוב רק עד שהוא משנה צבע (שלא יתייבש).</li>
+        <li>מוסיפים את התבלינים: כמון, פפריקה, צ'ילי, אורגנו, מלח ופלפל. מערבבים כדקה לפתיחת הארומות.</li>
+        <li>יוצקים את ציר הבקר, מערבבים, מביאים לרתיחה ומכבים מיד את האש.</li>
+        <li>מעבירים לקערה ומצננים לחלוטין. כשהתערובת קרה, מקפלים פנימה את הביצה הקשה, הזיתים והבצל הירוק. <strong>(חובה לעבוד עם מלית קרה לחלוטין כדי שהבצק לא יימס).</strong></li>
+      </ol>
+
+      <h4>3. רידוד, קיפול וסגירה (Repulgue)</h4>
+      <ol>
+        <li>מוציאים את הבצק מהמקרר ומרדדים על משטח מקומח קלות לעובי דק של כ-1.5–2 מ"מ.</li>
+        <li>קורצים עיגולים בקוטר של כ-8–9 ס"מ (למנות אישיות קטנות של שני ביסים).</li>
+        <li>מניחים כפית גדושה מהמלית במרכז כל עיגול.</li>
+        <li>מברישים מעט מאוד מים בחצי מההיקף, מקפלים לצורת חצי סהר ומהדקים היטב את השוליים באצבעות כדי להוציא כיסי אוויר.</li>
+        <li>סוגרים בצביטות וקיפולים מסורתיים (Repulgue) או מהדקים בשיני מזלג.</li>
+      </ol>
+
+      <h4>4. טיגון או אפייה</h4>
+      <div class="recipe-sub">אופציה א': טיגון עמוק (מומלץ ביותר למיצוי יתרון הוודקה):</div>
+      <p>מחממים שמן עמוק לחום של כ-180°C. מטגנים 2–3 דקות מכל צד עד להזהבה עמוקה והופעת בועיות פריכות קטנות על פני כל הבצק. מוציאים לנייר סופג.</p>
+      <div class="recipe-sub">אופציה ב': אפייה בתנור:</div>
+      <p>מסדרים על תבנית מרופדת בנייר אפייה, מברישים בביצה טרופה עם כפית חלב, ואופים בתנור שחומם מראש ל-200°C כ-15–18 דקות עד להשחמה יפה.</p>
+      <p>מגישים חם לצד רוטב צ'ימיצ'ורי טרי וחמצמץ.</p>
+    </div>
+  </template>
+
+  <template id="recipe-muffins">
+    <summary>📖 מתכון מלא: לחמניות בריוש – אינגליש מאפינס</summary>
+    <div class="recipe-body">
+      <h4>החומרים ל-12-14 לחמניות</h4>
+      <ul>
+        <li>500 גרם קמח (1/2 3 כוסות + כף)</li>
+        <li>8 גרם (3/4 כף) שמרים יבשים, או- 25 גרם שמרים טריים</li>
+        <li>30 גרם סוכר (3 כפות)</li>
+        <li>כפית ורבע מלח</li>
+        <li>240 מ"ל חלב, חמים (כוס)</li>
+        <li>140 מ"ל מים (1/2 כוס + כף)</li>
+        <li>40 גרם חמאה, רכה מאוד</li>
+        <li>50 גרם סולת / קמח תירס (1/3 כוס)</li>
+      </ul>
+      <div class="recipe-sub">כלים:</div>
+      <ul>
+        <li>מחבת חסינת חום גדולה + מכסה תואם</li>
+      </ul>
+
+      <h4>אופן ההכנה</h4>
+      <div class="recipe-sub">לבצק:</div>
+      <ol>
+        <li>בקערת מערבל חשמלי עם וו הלישה מערבבים קמח, שמרים, סוכר ומלח.</li>
+        <li>מוסיפים חלב ומים בהדרגה ולשים עד לקבלת בצק אחיד. מוסיפים גם את החמאה הרכה בהדרגה ולשים להטמעה.</li>
+        <li>מגבירים למהירות בינונית ולשים לעוד כ-8-10 דקות לבצק אלסטי אך מאוד רך ודביק וזה בסדר.</li>
+        <li>משמנים בנדיבות קערה ומעבירים אליה את הבצק, מגלגלים אותו מעט בזמן ומעצבים בידיים משומנות לכדור רך. מכסים במגבת נקייה או בניילון נצמד ומתפיחים בטמפ' החדר עד להכפלת הנפח (אם רוצים אפשר להתפיח לילה במקרר עד 12 שעות).</li>
+      </ol>
+      <div class="recipe-sub">לעיצוב:</div>
+      <ol>
+        <li>מרפדים תבנית תנור בנייר אפייה, מפזרים עליה כמה חופנים של סולת או קמח תירס ומניחים בהישג יד.</li>
+        <li>מקמחים משטח עבודה. כשהבצק סיים תפיחה והכפיל את נפחו- <strong>לא מוציאים ממנו את האוויר!</strong></li>
+        <li>מפרידים אותו בעדינות מדפנות הקערה, ופשוט הופכים אותו בעדינות כך שיעבור למשטח העבודה, זאת על מנת להוציא ממנו כמה שפחות אוויר בתהליך.</li>
+        <li>בעזרת כפות ידיים מקומחות, משטחים את הבצק לעלה שמנמן בעובי של כ-2-2.5 ס"מ, כאשר מנסים להוציא כמה שפחות אוויר מהבצק. (לכן גם לא מרדדים במערוך).</li>
+        <li>קורצים מהבצק עיגולים בעזרת חותכן מקומח או כוס מקומחת מעט בקוטר של 7-7.5 ס"מ, השתדלו לקרוץ אותם צפופים ככל הניתן ולקמח את החותכן בין פעם לפעם. מאחר והבצק רך למדי, יתכן ולא יתקבלו עיגולים מושלמים וזה בסדר- אפשר פשוט לסדר אותם מעט בעזרת הידיים, הרכות היא מה שתגרום ללחמניות להיות רכות ובמיוחד.</li>
+        <li>מעבירים כל עיגול בצק בעדינות לתבנית ובה הסולת/קמח התירס ומסדרים במרווחים, במקרה הצורך אפשר להרים אותן בעזרת ספטולה או מרית טיגון בעדינות מצידם התחתון.</li>
+        <li>מפזרים על הלחמניות מעט סולת או קמח תירס מעל, מכסים במגבת נקייה או בניילון נצמד רופף ומתפיחים חצי התפחה- כ-30 דקות בלבד בטמפרטורת החדר עד להתפחה חלקית (או כ-45 דקות בימים קרים).</li>
+        <li>בינתיים אוספים את יתרת הבצק שנשאר, מאחדים לכדור, מכסים ונותנים לנוח כרבע שעה וחוזרים על הפעולה לקבלת עיגולי בצק נוספים.</li>
+      </ol>
+      <div class="recipe-sub">לקליית הלחמניות:</div>
+      <ol>
+        <li>מחממים היטב מחבת גדולה על להבה בינונית, בעוצמת חום בינונית-נמוכה (אם יש מחבת ברזל זה נהדר, אני הכנתי במחבת נון סטיק רגילה, כמו כל מחבת שניצלים).</li>
+        <li>מפזרים על המחבת מעט סולת או קמח תירס. מעבירים בכל פעם כ-4-5 לחמניות בעדינות למחבת במרווחים של כ-3 ס"מ ביניהן, כאשר מרימים אותן בעזרת ספטולה או מרית טיגון בעדינות מצידן התחתון ומניחים בעדינות במחבת. גם אם הן מתפנצ'רות מעט תוך כדי זה בסדר.</li>
+        <li>מכסים מיד את המחבת במכסה כדי שהלחמניות יוכלו להתבשל היטב מהאדים.</li>
+        <li>קולים את הלחמניות כ-7-10 דקות על להבה יחסית נמוכה, כך שהלחמניות תופחות, מתבשלות מהאדים ותחתיתן משחימה.</li>
+        <li><strong>קריטי שתהליך זה יעשה באיטיות</strong>- במידה והלהבה תהיה גבוהה מדי, הלחמניות ישחימו בצידן התחתון בזמן שהלחמניה תישאר בצקית בפנים.</li>
+        <li>מומלץ לאחר כ-5-6 דקות להרים בעדינות את תחתית של הלחמניה על גבי מזלג ולראות מה מצבה- במידה ולאחר כ-6 דקות לא השחימה בתחתיתה כלל, הגבירו להבה על מנת שתשחים. במידה והשחימה בשלב מוקדם מדי הנמיכו מאוד להבה. (עדיף בכל פעם לטגן על להבה נמוכה ולהשחים בסוף כדי לוודא שהלחמניה עשויה היטב, מאשר שרופה בחוץ ולא מוכנה בפנים).</li>
+        <li>לאחר שהלחמניות השחימו מצד אחד, הופכים אותן לצד השני בעזרת מרית טיגון או ספטולה. בעת היפוך הלחמניות לצד השני הן "מתפנצ'רות" מעט וזה בסדר. מנמיכים להבה וקולים את הלחמניות מצידן השני כ-5-7 דקות נוספות באותו האופן.</li>
+        <li>מעבירים את הלחמניות לרשת צינון, מומלץ לכסות מיד במגבת נקייה בזמן הצינון כדי לשמור על רכות מוגברת.</li>
+        <li>חוזרים על הפעולה עם שאר הלחמניות, כאשר בין לבין הטיגונים שופכים את יתרת הסולת/קמח תירס הקלוי שבמחבת, מעבירים על המחבת נייר סופג כדי לנקות אותה משאריות, ומפזרים שוב מעט סולת/קמח תירס לפני תחילת הטיגון שוב.</li>
+      </ol>
+    </div>
+  </template>
+
+  <template id="recipe-corn">
+    <summary>📖 מתכון מלא: רוטב תירס שרוף</summary>
+    <div class="recipe-body">
+      <h4>מצרכים (לפי המתכון של Dor Peleg)</h4>
+      <ul>
+        <li>300 גרם גרגירי תירס (טרי או קפוא)</li>
+        <li>200 גרם חמאה קרה, חתוכה לקוביות</li>
+        <li>2 כוסות ממי בישול הפסטה (או מים חמים)</li>
+        <li>מלח ופלפל שחור לפי הטעם</li>
+        <li>להגשה: פרמזן מגורדת ובצל ירוק קצוץ</li>
+      </ul>
+
+      <h4>אופן ההכנה</h4>
+      <ol>
+        <li><strong>חריכת התירס:</strong> מחממים מחבת יבשה בחום גבוה ומחכים שתהיה לוהטת. מוסיפים את גרגירי התירס וצורבים אותם ללא שמן כ-10 דקות עד שהם משחימים ושרופים היטב בחלקם ומפתחים ארומה קלויה.</li>
+        <li><strong>טחינה:</strong> מעבירים את התירס השרוף לבלנדר יחד עם 2 כוסות ממי בישול הפסטה הטחונים (או מים חמים) וטוחנים למחית חלקה.</li>
+        <li><strong>הסמכה עם חמאה:</strong> מחזירים את המחית למחביאה או לסיר קטן על אש עדינה. מתחילים להוסיף בהדרגה את קוביות החמאה הקרה תוך כדי ערבוב נמרץ (או בלנדר מוט) עד שהיא נטמעת ברוטב ונוצר מרקם קרמי ואמולסיה עשירה.</li>
+        <li><strong>תיבול והגשה:</strong> מתבלים במלח ופלפל שחור, ומערבבים פנימה את הפסטה המבושלת או יוצקים על המנה הרצויה. מעטרים בפרמזן ובצל ירוק.</li>
+      </ol>
+    </div>
+  </template>
+
+  <template id="recipe-hollandaise">
+    <summary>📖 מתכון מלא: הולנדייז גהי בבלנדר מוט – 12 מנות</summary>
+    <div class="recipe-body">
+      <p>בהכנת כמות משולשת, נפח הרוטב גדול בהרבה (מעל חצי ליטר). הכוס המקורית הצרה של הבלנדר עלולה להיות קטנה מדי, לכן מומלץ להשתמש במד-ליטר צר וגבוה (או כלי גלילי צר בנפח של לפחות 1 ליטר) שמאפשר לבלנדר לשבת בנוחות בקרקעית.</p>
+
+      <h4>מצרכים</h4>
+      <ul>
+        <li>9 חלמונים (מביצים בגודל L, בטמפרטורת החדר)</li>
+        <li>375 גרם גהי</li>
+        <li>6 כפות מים חמימים (כ-90 מ"ל)</li>
+        <li>5–6 כפות מיץ לימון סחוט טרי (כ-75–90 מ"ל, לפי הטעם)</li>
+        <li>3/4 כפית מלח דק</li>
+        <li>1/4 כפית פלפל קאיין או פלפל לבן טחון</li>
+      </ul>
+
+      <h4>אופן ההכנה</h4>
+      <div class="recipe-sub">בסיס הרוטב בכלי:</div>
+      <ol>
+        <li>מניחים בתחתית הכלי הגבוה והצר את החלמונים, המים החמימים, מיץ הלימון, המלח והפלפל.</li>
+      </ol>
+      <div class="recipe-sub">חימום הגהי:</div>
+      <ol>
+        <li>ממיסים ומחממים את הגהי בסיר קטן עד שהוא חם מאוד (סביב 75°C, מבעבע קלות).</li>
+        <li>בגלל כמות החלמונים הגדולה, חשוב שהגהי יהיה חם מספיק כדי לחמם ולייצב את כל המסה תוך כדי הערבול.</li>
+      </ol>
+      <div class="recipe-sub">יצירת האמולסיה:</div>
+      <ol>
+        <li>מצמידים את ראש בלנדר המוט הישר לתחתית הכלי.</li>
+        <li>מפעילים בעוצמה מקסימלית מבלי להזיז את הבלנדר כלפי מעלה.</li>
+        <li>יוצקים את הגהי החם בזרם דק, איטי ורציף.</li>
+        <li>שומרים את הבלנדר צמוד לתחתית ב-30–40 השניות הראשונות עד שנוצרת שכבה צהובה, בהירה וסמיכה מאוד בקרקעית.</li>
+        <li>כשרק כרבע מכמות הגהי נותרה, מתחילים להעלות ולהוריד את הבלנדר בתנועות איטיות ויציבות כדי להטמיע את כל השומן שצף למעלה.</li>
+      </ol>
+      <div class="recipe-sub">איזון והגשה / שמירה על חום:</div>
+      <ol>
+        <li>טועמים ומתקנים מלח או חמיצות.</li>
+        <li><strong>טיפ לשמירה על חום ל-12 סועדים:</strong> כדי שהרוטב לא יתקרר ויתקשה עד ההגשה לכל האורחים, מעבירים אותו מיד לתרמוס רחב (שחומם מראש עם מים רותחים ורוקן), או מניחים את הכלי בתוך קערה עם מים חמימים (לא רותחים).</li>
+      </ol>
+    </div>
+  </template>
 
   <script>
     const STORAGE_KEY = 'tasting_menu_checklist_v3_rice';
@@ -750,7 +1286,15 @@
       window.scrollTo(0, 0);
     }
 
+    function injectRecipes() {
+      document.querySelectorAll('details[data-recipe]').forEach(el => {
+        const tpl = document.getElementById('recipe-' + el.dataset.recipe);
+        if (tpl) el.appendChild(tpl.content.cloneNode(true));
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+      injectRecipes();
       loadSavedState();
 
       document.querySelectorAll('.task-item input[type="checkbox"]').forEach(cb => {
